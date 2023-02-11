@@ -5,8 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { IconUnderlineOn } from '../../assets';
 import { WARNA_DISABLE } from '../../utils/constant';
 
-const Stack = createNativeStackNavigator();
-const Tab = createMaterialTopTabNavigator();
+// const Stack = createNativeStackNavigator();
+// const Tab = createMaterialTopTabNavigator();
 
 export default function TopNavBox({ selectPesanan, setSelectPesanan }) {
     return (

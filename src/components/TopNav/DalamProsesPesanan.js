@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, RefreshControl } from 'react-native'
+import { StyleSheet, Text, View, FlatList, RefreshControl, Modal, Pressable } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react';
 import { PesananAktif } from '../../components';
 import axios from "axios";
@@ -6,6 +6,11 @@ import axios from "axios";
 const DalamProses = () => {
   const [order, setOrder] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const bukaModal2 = () => {
+    // setModalVisible(true);
+    console.log("Buka Modal 2bisa")
+  }
   const fetchData = async () => {
     try {
       const { data } = await axios.get("http://153.92.210.7:3001/produk")
@@ -34,14 +39,17 @@ const DalamProses = () => {
 
   return (
     <View style={styles.pesananAktif}>
-      <FlatList refreshControl={
-      <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-    }
+      <FlatList 
         data={order}
         renderItem={
-          ({ item }) => <PesananAktif
-            key={item.noid_produk}
-            item={item} />
+          ({ item }) =>
+            <Pressable onPressIn={() => bukaModal2()}>
+              <PesananAktif
+               keyExtractor={item => item.noid_produk}
+                key={item.noid_produk}
+                initialNumToRender={5}
+                item={item} />
+            </Pressable>
         }
       />
     </View>

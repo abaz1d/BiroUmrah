@@ -14,12 +14,12 @@ const PesananTab = () => {
                     onValueChange={(itemValue, itemIndex) =>
                         setSelectGender(itemValue)
                     }>
-                   <Picker.Item label="Cuci Komplit" value="Cuci Komplit" />
+                   {/* <Picker.Item label="Cuci Komplit" value="Cuci Komplit" />
                     <Picker.Item label="Cuci Kering" value="Cuci Kering" />
                     <Picker.Item label="Setrika Aja" value="Setrika Aja" />
                     <Picker.Item label="Paket Bulanan" value="Paket Bulanan" />
                     <Picker.Item label="Paket Tahunan" value="Paket Tahunan" />
-                    <Picker.Item label="Paket Urgent" value="Paket Urgent" />
+                    <Picker.Item label="Paket Urgent" value="Paket Urgent" /> */}
                 </Picker>
             </View>
         </View>

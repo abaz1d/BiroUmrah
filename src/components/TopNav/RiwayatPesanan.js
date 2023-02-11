@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { PesananAktif } from '../../components';
 import axios from "axios";
 
-const RiwayatPesanan = () => {
+const RiwayatPesanan = (bukaModal) => {
   const [order, setOrder] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
   const fetchData = async () => {

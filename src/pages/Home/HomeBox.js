@@ -1,4 +1,5 @@
-import { SafeAreaView, ImageBackground, StyleSheet, Text, View, Dimensions, Image, ScrollView, FlatList, RefreshControl, Pressable } from 'react-native'
+import { SafeAreaView, ImageBackground, StyleSheet, Text, View, Dimensions, Image,  FlatList, RefreshControl, Pressable } from 'react-native'
+import { ScrollView } from 'react-native-virtualized-view';
 import React, { useEffect, useRef, useState } from 'react';
 import { ImageHeader, Avatar } from '../../assets'
 import { ButtonIcon, PesananAktif, SearchBox } from '../../components'
@@ -67,7 +68,7 @@ const Home = () => {
           <FlatList disableVirtualization={true}
             data={order}
             renderItem={
-              ({ item }) => <PesananAktif
+              ({ item }) => <PesananAktif onPress={() => console.log("pres")}
                 key={item.noid_produk}
                 item={item} />
             }
