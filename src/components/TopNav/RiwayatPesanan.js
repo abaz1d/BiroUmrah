@@ -1,44 +1,50 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, RefreshControl } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react';
 import { PesananAktif } from '../../components';
+import axios from "axios";
 
 const RiwayatPesanan = () => {
   const [order, setOrder] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = React.useState(false);
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get("http://153.92.210.7:3001/produk")
+      // const { data } = await request.get('/produk')
+
+      if (data.success) {
+        let response = await data.data;
+        setOrder(response.filter(item => item.pulang));
+        setRefreshing(false);
+      } else {
+        throw 'Error fetching users list'
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let response = await fetch('http://localhost:3001/orders?email=coba@gmail.com');
-
-        if (response.status === 200) {
-          let data = await response.json();
-          setOrder(data.filter(item => item.status === 'Order Completed'));
-        } else {
-          throw 'Error fetching users list'
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    }
     fetchData();
-    setLoading(false);
-
   }, [order.length])
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    fetchData();
+  }, []);
 
   return (
     <View style={styles.pesananAktif}>
-    <FlatList
-      data={order}
-      renderItem={
-        ({ item }) =>
-          <PesananAktif
-            key={item._id}
-            noinvoice={'Pesanan No.' + item.orderDetails}
-            status={item.status} />
+      <FlatList refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
-    />
-  </View>
+        data={order}
+        renderItem={
+          ({ item }) => <PesananAktif
+            key={item.noid_produk}
+            item={item} />
+        }
+      />
+    </View>
   )
 }
 

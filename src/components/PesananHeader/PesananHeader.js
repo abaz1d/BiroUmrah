@@ -7,7 +7,7 @@ export default function PesananHeader() {
     return (
         <View style={styles.container}>
             <IconSearch />
-            <Text style={styles.title}>Daftar Pesanan</Text>
+            <Text style={styles.title}>Daftar Keberangkatan</Text>
             <Image source={Avatar} style={styles.avatar} />
         </View>
     )
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontSize: 24,
+        fontSize: windowWidth * 0.045,
         fontFamily: 'TitilliumWeb-Bold',
         color: 'black',
     },

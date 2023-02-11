@@ -10,8 +10,8 @@ const Pesanan = () => {
   const [selectPesanan, setSelectPesanan] = useState('Riwayat');
   return (
     <View style={styles.page}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <ImageBackground  style={styles.header}>
+      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+        <ImageBackground style={styles.header}>
           <PesananHeader />
         </ImageBackground>
         <TopNavBox selectPesanan={selectPesanan} setSelectPesanan={setSelectPesanan} />
@@ -20,7 +20,7 @@ const Pesanan = () => {
         ) : (
           <RiwayatPesanan />
         )}
-      </ScrollView>
+      {/* </ScrollView> */}
     </View>
   )
 }
