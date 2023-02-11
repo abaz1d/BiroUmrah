@@ -18,7 +18,11 @@ import IconUnderlineOff from './underline-off.svg';
 import IconLogOut from './logout-icon.svg';
 import IconEditProfile from './edit-icon.svg';
 import IconHaji from './Haji.svg';
-import IconUmrah from './umrah.svg';
+import IconHaji2 from './Haji2.svg';
+import IconHaji3 from './Haji3.svg';
+import IconUmrah from './Umrah.svg';
+import IconUmrah2 from './Umrah2.svg';
+import IconUmrah3 from './Umrah3.svg';
 import IconMecca from './Mecca-Icon.svg';
 import IconMedina from './Medina-Icon.svg';
 import IconAirplane from './Airplane-Icon.svg';
@@ -46,7 +50,11 @@ export {
     IconLogOut,
     IconEditProfile,
     IconHaji,
+    IconHaji2,
+    IconHaji3,
     IconUmrah,
+    IconUmrah2,
+    IconUmrah3,
     IconMecca,
     IconMedina,
     IconAirplane,

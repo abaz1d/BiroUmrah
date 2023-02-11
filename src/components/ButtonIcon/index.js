@@ -8,7 +8,11 @@ import {
   IconCuciTahunan,
   IconCuciUrgent,
   IconHaji,
-  IconUmrah
+  IconUmrah,
+  IconHaji2,
+  IconUmrah2,
+  IconHaji3,
+  IconUmrah3
 } from '../../assets';
 import { WARNA_SEKUNDER, WARNA_UTAMA } from '../../utils/constant';
 import { useNavigation } from '@react-navigation/native';
@@ -20,13 +24,13 @@ const ButtonIcon = ({ title, type }) => {
 
     if (title === 'Umrah Plus') return <IconUmrah />;
 
-    if (title === 'Haji Reguler') return <IconSetrikaAja />;
+    if (title === 'Haji Reguler') return <IconHaji2 />;
 
-    if (title === 'Umrah Reguler') return <IconCuciBulanan />;
+    if (title === 'Umrah Reguler') return <IconUmrah2 />;
 
-    if (title === 'Umrah Ramadhan') return <IconCuciTahunan />;
+    if (title === 'Umrah Ramadhan') return <IconHaji3 />;
 
-    if (title === 'Terpopuler') return <IconCuciUrgent />;
+    if (title === 'Terpopuler') return <IconUmrah3 />;
 
     return <IconCuciKomplit />;
   };

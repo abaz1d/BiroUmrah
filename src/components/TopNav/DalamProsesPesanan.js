@@ -1,16 +1,12 @@
-import { StyleSheet, Text, View, FlatList, RefreshControl, Modal, Pressable } from 'react-native'
+import { StyleSheet, Text, View, RefreshControl, Pressable } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react';
+import { FlatList } from 'react-native-gesture-handler'
 import { PesananAktif } from '../../components';
 import axios from "axios";
 
-const DalamProses = () => {
+const DalamProses = ({ bukaModal }) => {
   const [order, setOrder] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const bukaModal2 = () => {
-    // setModalVisible(true);
-    console.log("Buka Modal 2bisa")
-  }
   const fetchData = async () => {
     try {
       const { data } = await axios.get("http://153.92.210.7:3001/produk")
@@ -29,6 +25,7 @@ const DalamProses = () => {
   }
 
   useEffect(() => {
+    setRefreshing(true);
     fetchData();
   }, [order.length])
 
@@ -37,20 +34,24 @@ const DalamProses = () => {
     fetchData();
   }, []);
 
+  const renderItem = ({ item }) => {
+    return (
+      <Pressable onPressOut={() => bukaModal(item)}>
+        <PesananAktif onPressOut={() => bukaModal(item)}
+          key={item.noid_produk}
+          item={item} />
+      </Pressable>
+    )
+  };
+
   return (
     <View style={styles.pesananAktif}>
-      <FlatList 
+      <FlatList refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
         data={order}
-        renderItem={
-          ({ item }) =>
-            <Pressable onPressIn={() => bukaModal2()}>
-              <PesananAktif
-               keyExtractor={item => item.noid_produk}
-                key={item.noid_produk}
-                initialNumToRender={5}
-                item={item} />
-            </Pressable>
-        }
+        renderItem={renderItem}
+        onEndReachedThreshold={0}
       />
     </View>
   )

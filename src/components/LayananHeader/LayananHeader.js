@@ -1,13 +1,17 @@
-import { StyleSheet, Text, View, Dimensions, Image } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, Image, Pressable } from 'react-native'
 import { IconSearch, Avatar } from '../../assets';
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
 
-const LayananHeader = ({namaLayanan}) => {
+const LayananHeader = ({ namaLayanan }) => {
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
             <IconSearch />
             <Text style={styles.title}>{namaLayanan}</Text>
-            <Image source={Avatar} style={styles.avatar} />
+            <Pressable onPress={() => navigation.navigate("Akun")}>
+                <Image source={Avatar} style={styles.avatar} />
+            </Pressable>
         </View>
     )
 }
@@ -29,7 +33,7 @@ const styles = StyleSheet.create({
         color: 'black',
     },
     avatar: {
-        width: windowWidth * 0.12,
-        height: windowHeight * 0.061,
+        width: windowWidth * 0.11,
+        height: windowWidth * 0.11,
     },
 })

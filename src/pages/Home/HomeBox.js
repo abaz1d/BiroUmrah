@@ -1,12 +1,14 @@
-import { SafeAreaView, ImageBackground, StyleSheet, Text, View, Dimensions, Image,  FlatList, RefreshControl, Pressable } from 'react-native'
+import { SafeAreaView, ImageBackground, StyleSheet, Text, View, Dimensions, Image, FlatList, RefreshControl, Pressable } from 'react-native'
 import { ScrollView } from 'react-native-virtualized-view';
 import React, { useEffect, useRef, useState } from 'react';
 import { ImageHeader, Avatar } from '../../assets'
 import { ButtonIcon, PesananAktif, SearchBox } from '../../components'
 import { WARNA_ABU_ABU, WARNA_UTAMA } from '../../utils/constant'
+import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
 
 const Home = () => {
+  const navigation = useNavigation();
   const [order, setOrder] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
   const fetchData = async () => {
@@ -27,6 +29,7 @@ const Home = () => {
   }
 
   useEffect(() => {
+    setRefreshing(true);
     fetchData();
   }, [order.length])
 
@@ -41,7 +44,9 @@ const Home = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
         <ImageBackground source={ImageHeader} style={styles.header}>
-          <Image source={Avatar} style={styles.avatar} />
+          <Pressable onPress={() => navigation.navigate("Akun")}>
+            <Image source={Avatar} style={styles.avatar} />
+          </Pressable>
           <View style={styles.greet}>
             <Text style={styles.hai}>Hai, <Text style={styles.username}>Kamu</Text></Text>
             <Text style={styles.datang}>Assalamu'alaikum</Text>
@@ -64,15 +69,17 @@ const Home = () => {
           </ScrollView>
         </View>
         <SafeAreaView style={styles.pesananAktif}>
-          <Text style={styles.label}>Daftar Keberangkatan &gt;</Text>
-          <FlatList disableVirtualization={true}
-            data={order}
-            renderItem={
-              ({ item }) => <PesananAktif onPress={() => console.log("pres")}
-                key={item.noid_produk}
-                item={item} />
-            }
-          />
+          <Pressable onPress={() => navigation.navigate("Keberangkatan")}>
+            <Text style={styles.label}>Daftar Keberangkatan &gt;</Text>
+            <FlatList disableVirtualization={true} onPress={() => navigation.navigate("Keberangkatan")}
+              data={order}
+              renderItem={
+                ({ item }) => <PesananAktif
+                  key={item.noid_produk}
+                  item={item} />
+              }
+            />
+          </Pressable>
         </SafeAreaView>
       </ScrollView>
     </View>
@@ -102,7 +109,7 @@ const styles = StyleSheet.create({
   },
   avatar: {
     width: windowWidth * 0.11,
-    height: windowHeight * 0.061,
+    height: windowWidth * 0.11,
   },
   greet: {
     marginTop: 20,

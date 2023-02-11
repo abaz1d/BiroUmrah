@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   avatar: {
     width: windowWidth * 0.11,
-    height: windowHeight * 0.061,
+    height: windowWidth * 0.11,
   },
   greet: {
     marginTop: 20,

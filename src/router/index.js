@@ -30,12 +30,12 @@ const Router = () => {
         <Stack.Navigator initialRouteName="Splash">
             <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
             <Stack.Screen name="MainApp" component={MainApp} options={{ headerShown: false }} />
-            <Stack.Screen name="Cuci Kering" component={CuciKering} options={{ headerShown: false }} />
-            <Stack.Screen name="Cuci Komplit" component={CuciKomplit} options={{ headerShown: false }} />
-            <Stack.Screen name="Paket Bulanan" component={PaketBulanan} options={{ headerShown: false }} />
-            <Stack.Screen name="Paket Tahunan" component={PaketTahunan} options={{ headerShown: false }} />
-            <Stack.Screen name="Paket Urgent" component={PaketUrgent} options={{ headerShown: false }} />
-            <Stack.Screen name="Setrika Aja" component={SetrikaAja} options={{ headerShown: false }} />
+            <Stack.Screen name="Umrah Plus" component={CuciKering} options={{ headerShown: false }} />
+            <Stack.Screen name="Haji Plus" component={CuciKomplit} options={{ headerShown: false }} />
+            <Stack.Screen name="Umrah Reguler" component={PaketBulanan} options={{ headerShown: false }} />
+            <Stack.Screen name="Umrah Ramadhan" component={PaketTahunan} options={{ headerShown: false }} />
+            <Stack.Screen name="Terpopuler" component={PaketUrgent} options={{ headerShown: false }} />
+            <Stack.Screen name="Haji Reguler" component={SetrikaAja} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

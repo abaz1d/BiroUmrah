@@ -4,6 +4,7 @@ import { ImagePesananHeader } from '../../assets'
 import { ButtonIcon, PesananAktif, SearchBox, LayananHeader, TopNavBox } from '../../components'
 import PesananTab from '../../components/PesananHeader/PesananTab'
 import { Picker } from '@react-native-picker/picker';
+import { WARNA_UTAMA } from '../../utils/constant'
 
 const CuciKomplit = () => {
   const [selectGender, setSelectGender] = useState();
@@ -11,8 +12,8 @@ const CuciKomplit = () => {
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <ImageBackground source={ImagePesananHeader} style={styles.header}>
-          <LayananHeader namaLayanan={'Cuci Komplit'} />
+        <ImageBackground style={styles.header}>
+          <LayananHeader namaLayanan={'Haji Plus'} />
         </ImageBackground>
         <PesananTab />
        
@@ -32,6 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   header: {
+    backgroundColor: WARNA_UTAMA,
     width: windowWidth,
     height: windowHeight * 0.17,
     paddingHorizontal: 30,

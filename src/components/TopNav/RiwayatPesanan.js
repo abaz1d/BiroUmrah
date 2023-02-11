@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View, FlatList, RefreshControl } from 'react-native'
+import { StyleSheet, Text, View, FlatList, RefreshControl, Pressable } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react';
 import { PesananAktif } from '../../components';
 import axios from "axios";
 
-const RiwayatPesanan = (bukaModal) => {
+const RiwayatPesanan = ({ bukaModal }) => {
   const [order, setOrder] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
   const fetchData = async () => {
@@ -24,6 +24,7 @@ const RiwayatPesanan = (bukaModal) => {
   }
 
   useEffect(() => {
+    setRefreshing(true);
     fetchData();
   }, [order.length])
 
@@ -39,9 +40,12 @@ const RiwayatPesanan = (bukaModal) => {
       }
         data={order}
         renderItem={
-          ({ item }) => <PesananAktif
-            key={item.noid_produk}
-            item={item} />
+          ({ item }) =>
+            <Pressable onPressOut={() => bukaModal(item)}>
+              <PesananAktif
+                key={item.noid_produk}
+                item={item} />
+            </Pressable>
         }
       />
     </View>
