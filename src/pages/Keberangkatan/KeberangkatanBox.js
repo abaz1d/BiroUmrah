@@ -20,9 +20,6 @@ const Pesanan = () => {
   return (
     <View style={styles.page}
       onStartShouldSetResponder={() => true}
-    // onResponderRelease={(event) => {
-    //   console.log("Swipe", event.nativeEvent.changedTouches)
-    // }}>
     >
       <Modal
         animationType="slide"

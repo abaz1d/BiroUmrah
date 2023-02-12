@@ -14,8 +14,6 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get("http://153.92.210.7:3001/produk")
-      // const { data } = await request.get('/produk')
-
       if (data.success) {
         let response = await data.data;
         setOrder(response);
