@@ -14,82 +14,92 @@
       </a>
     </div>
   </div>
-  <div class="intro-y box p-5 mt-5">
-    <div class="flex flex-col sm:flex-row sm:items-end xl:items-start">
-      <form id="tabulator-html-filter-form" class="xl:flex sm:mr-auto">
-        <div class="sm:flex items-center sm:mr-4">
-          <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Field</label>
-          <select id="tabulator-html-filter-field" v-model="filter.field"
-            class="form-select w-full 2xl:w-full mt-2 sm:mt-0 sm:w-auto">
-            <option value="id_user">ID User</option>
-            <option value="username">Username</option>
-            <option value="role">Role</option>
-            <option value="nama_region">Region</option>
-            <option value="email_user">Email</option>
-            <option value="password">Password</option>
-          </select>
+  <div class="grid grid-cols-12 gap-6">
+    <div class="col-span-12 2xl:col-span-9">
+      <div class="intro-y box p-5 mt-5">
+        <div class="flex flex-col sm:flex-row sm:items-end xl:items-start">
+          <form id="tabulator-html-filter-form" class="xl:flex sm:mr-auto">
+            <div class="sm:flex items-center sm:mr-4">
+              <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Field</label>
+              <select id="tabulator-html-filter-field" v-model="filter.field"
+                class="form-select w-full 2xl:w-full mt-2 sm:mt-0 sm:w-auto">
+                <option value="id_user">ID User</option>
+                <option value="username">Username</option>
+                <option value="role">Role</option>
+                <option value="nama_region">Region</option>
+                <option value="email_user">Email</option>
+                <option value="password">Password</option>
+              </select>
+            </div>
+            <div class="sm:flex items-center sm:mr-4 mt-2 xl:mt-0">
+              <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Type</label>
+              <select id="tabulator-html-filter-type" v-model="filter.type"
+                class="form-select w-full mt-2 sm:mt-0 sm:w-auto">
+                <option value="like" selected>like</option>
+                <option value="=">=</option>
+                <option value="<">&lt;</option>
+                <option value="<=">&lt;=</option>
+                <option value=">">></option>
+                <option value=">=">>=</option>
+                <option value="!=">!=</option>
+              </select>
+            </div>
+            <div class="sm:flex items-center sm:mr-4 mt-2 xl:mt-0">
+              <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Value</label>
+              <input id="tabulator-html-filter-value" v-model="filter.value" type="text"
+                class="form-control sm:w-40 2xl:w-full mt-2 sm:mt-0" placeholder="Search..." />
+            </div>
+            <div class="mt-2 xl:mt-0">
+              <button id="tabulator-html-filter-go" type="button" class="btn btn-primary w-full sm:w-16"
+                @click="onFilter">
+                Go
+              </button>
+              <button id="tabulator-html-filter-reset" type="button"
+                class="btn btn-secondary w-full sm:w-16 mt-2 sm:mt-0 sm:ml-1" @click="onResetFilter">
+                Reset
+              </button>
+            </div>
+          </form>
+          <div class="flex mt-5 sm:mt-0">
+            <button id="tabulator-print" class="btn btn-outline-secondary w-1/2 sm:w-auto mr-2" @click="onPrint">
+              <PrinterIcon class="w-4 h-4 mr-2" /> Print
+            </button>
+            <Dropdown class="w-1/2 sm:w-auto">
+              <DropdownToggle class="btn btn-outline-secondary w-full sm:w-auto">
+                <FileTextIcon class="w-4 h-4 mr-2" /> Export
+                <ChevronDownIcon class="w-4 h-4 ml-auto sm:ml-2" />
+              </DropdownToggle>
+              <DropdownMenu class="w-40">
+                <DropdownContent>
+                  <DropdownItem @click="onExportCsv">
+                    <FileTextIcon class="w-4 h-4 mr-2" /> Export CSV
+                  </DropdownItem>
+                  <DropdownItem @click="onExportXlsx">
+                    <FileTextIcon class="w-4 h-4 mr-2" /> Export XLSX
+                  </DropdownItem>
+                </DropdownContent>
+              </DropdownMenu>
+            </Dropdown>
+          </div>
         </div>
-        <div class="sm:flex items-center sm:mr-4 mt-2 xl:mt-0">
-          <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Type</label>
-          <select id="tabulator-html-filter-type" v-model="filter.type" class="form-select w-full mt-2 sm:mt-0 sm:w-auto">
-            <option value="like" selected>like</option>
-            <option value="=">=</option>
-            <option value="<">&lt;</option>
-            <option value="<=">&lt;=</option>
-            <option value=">">></option>
-            <option value=">=">>=</option>
-            <option value="!=">!=</option>
-          </select>
+        <div class="overflow-x-auto scrollbar-hidden">
+          <div id="tabulator" ref="tableRef" class="mt-5 table-report table-report--tabulator"></div>
         </div>
-        <div class="sm:flex items-center sm:mr-4 mt-2 xl:mt-0">
-          <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Value</label>
-          <input id="tabulator-html-filter-value" v-model="filter.value" type="text"
-            class="form-control sm:w-40 2xl:w-full mt-2 sm:mt-0" placeholder="Search..." />
-        </div>
-        <div class="mt-2 xl:mt-0">
-          <button id="tabulator-html-filter-go" type="button" class="btn btn-primary w-full sm:w-16" @click="onFilter">
-            Go
-          </button>
-          <button id="tabulator-html-filter-reset" type="button"
-            class="btn btn-secondary w-full sm:w-16 mt-2 sm:mt-0 sm:ml-1" @click="onResetFilter">
-            Reset
-          </button>
-        </div>
-      </form>
-      <div class="flex mt-5 sm:mt-0">
-        <button id="tabulator-print" class="btn btn-outline-secondary w-1/2 sm:w-auto mr-2" @click="onPrint">
-          <PrinterIcon class="w-4 h-4 mr-2" /> Print
-        </button>
-        <Dropdown class="w-1/2 sm:w-auto">
-          <DropdownToggle class="btn btn-outline-secondary w-full sm:w-auto">
-            <FileTextIcon class="w-4 h-4 mr-2" /> Export
-            <ChevronDownIcon class="w-4 h-4 ml-auto sm:ml-2" />
-          </DropdownToggle>
-          <DropdownMenu class="w-40">
-            <DropdownContent>
-              <DropdownItem @click="onExportCsv">
-                <FileTextIcon class="w-4 h-4 mr-2" /> Export CSV
-              </DropdownItem>
-              <DropdownItem @click="onExportXlsx">
-                <FileTextIcon class="w-4 h-4 mr-2" /> Export XLSX
-              </DropdownItem>
-            </DropdownContent>
-          </DropdownMenu>
-        </Dropdown>
       </div>
     </div>
-    <div v-show="isLoading" wire:loading
-      class="fixed top-0 left-0 right-0 bottom-0 w-full h-[50vw] z-50 overflow-hidden bg-gray-700 opacity-75 flex flex-col items-center justify-center">
-      <Loader2Icon class="motion-safe:animate-spin stroke-[10px] text-white h-12 w-12 mb-4" />
-      <h2 class="text-center text-white text-xl font-semibold">Loading...</h2>
-      <p class="w-1/3 text-center text-white">
-        Ini mungkin memakan waktu beberapa detik, tolong jangan tutup halaman
-        ini.
-      </p>
+    <div class="col-span-12 2xl:col-span-3">
+      <ChildList v-if="Dashboard.items2.length !== 0" v-for="detail in Dashboard.items2" :key="detail.noid_produk"
+        :detail="detail" @openModalRemove="openModalRemove" @updateTotalAnggota="openupdateTotalAnggota" :data="data" />
     </div>
-    <div class="overflow-x-auto scrollbar-hidden">
-      <div id="tabulator" ref="tableRef" class="mt-5 table-report table-report--tabulator"></div>
-    </div>
+  </div>
+  <div v-show="isLoading" wire:loading
+    class="fixed top-0 left-0 right-0 bottom-0 w-full h-[50vw] z-50 overflow-hidden bg-gray-700 opacity-75 flex flex-col items-center justify-center">
+    <Loader2Icon class="motion-safe:animate-spin stroke-[10px] text-white h-12 w-12 mb-4" />
+    <h2 class="text-center text-white text-xl font-semibold">Loading...</h2>
+    <p class="w-1/3 text-center text-white">
+      Ini mungkin memakan waktu beberapa detik, tolong jangan tutup halaman
+      ini.
+    </p>
   </div>
   <!-- BEGIN: Delete Confirmation Modal -->
   <Modal :show="deleteConfirmationModal" @hidden="deleteConfirmationModal = false">
@@ -107,7 +117,7 @@
           Apakah Anda yakin akan menghapus Data Bulan <b> {{ moment(itemDel.periode_bulanan).format("MMM, YYYY") }} - {{
             itemDel.id_region
           }}</b> ? <br>
-          <small>{{ itemDel.id_tabel_anggota }}</small>
+          <small>{{ itemDel.noid_produk }}</small>
         </div>
       </div>
       <div class="px-5 pb-8 text-center">
@@ -117,7 +127,7 @@
         <button type="button" class="btn btn-danger w-24" @click="
           data_utama ?
             removeData(itemDel.id_utama)
-            : removeItem(itemDel.id_tabel_anggota)
+            : removeItem(itemDel.noid_produk)
         ">
           Delete
         </button>
@@ -415,21 +425,6 @@ const input_web = ref("")
 const input_fb = ref("")
 const input_ig = ref("")
 
-// provide("bind[dropzoneMultipleRef]", (el) => {
-//   dropzoneMultipleRef.value = el;
-// });
-
-// provide("bind[dropzoneSingleRef]", (el) => {
-//   dropzoneSingleRef.value = el;
-// });
-
-// provide("bind[monthDetailSelect]", (el) => {
-//   monthDetailSelect.value = el;
-// });
-// provide("bind[monthDetailSelect2]", (el) => {
-//   monthDetailSelect2.value = el;
-// });
-
 const resetModal = () => {
   isLoading.value = false;
   ModalData.value = false;
@@ -520,6 +515,7 @@ const initTabulator = () => {
     height: "100%",
     pagination: "remote",
     paginationSize: 10,
+    // paginationCounter:"pages",
     paginationSizeSelector: [10, 20, 30, 40, 50, 100],
     layout: "fitColumns",
     responsiveLayout: "collapse",
@@ -555,9 +551,24 @@ const initTabulator = () => {
         download: false,
         formatter(cell) {
           return `<div>
-                <div class="font-medium whitespace-nowrap">${
-                  cell.getData().noid_produk
-                }</div>
+                <div class="font-medium whitespace-nowrap">${cell.getData().noid_produk
+            }</div>
+              </div>`;
+        },
+      },
+      {
+        title: "PAKET",
+        minWidth: 200,
+        responsive: 0,
+        field: "paket",
+        vertAlign: "middle",
+        hozAlign: "center",
+        print: false,
+        download: false,
+        formatter(cell) {
+          return `<div>
+                <div class="font-medium whitespace-nowrap">${cell.getData().paket
+            }</div>
               </div>`;
         },
       },
@@ -572,9 +583,42 @@ const initTabulator = () => {
         download: false,
         formatter(cell) {
           return `<div>
-                <div class="font-medium whitespace-nowrap">${
-                  cell.getData().nama_travel
-                }</div>
+                <div class="font-medium whitespace-nowrap">${cell.getData().nama_travel
+            }</div>
+              </div>`;
+        },
+      },
+      {
+        title: "JUMLAH",
+        minWidth: 200,
+        responsive: 0,
+        field: "jumlah",
+        headerHozAlign: "center",
+        vertAlign: "middle",
+        hozAlign: "center",
+        print: false,
+        download: false,
+        formatter(cell) {
+          return `<div>
+                <div class="font-medium whitespace-nowrap">${cell.getData().jumlah
+            }</div>
+              </div>`;
+        },
+      },
+      {
+        title: "MUTOWIF",
+        minWidth: 200,
+        responsive: 0,
+        field: "mutowif",
+        headerHozAlign: "center",
+        vertAlign: "middle",
+        hozAlign: "center",
+        print: false,
+        download: false,
+        formatter(cell) {
+          return `<div>
+                <div class="font-medium whitespace-nowrap">${cell.getData().mutowif
+            }</div>
               </div>`;
         },
       },
@@ -624,297 +668,34 @@ const initTabulator = () => {
         download: true,
       },
       {
+        title: "NAMA PAKET",
+        field: "paket",
+        visible: false,
+        print: true,
+        download: true,
+      },
+      {
         title: "NAMA TRAVEL",
         field: "nama_travel",
         visible: false,
         print: true,
         download: true,
       },
-    ],
-    rowFormatter: function (row) {
-      var holderEl = document.createElement("div");
-      var tableEl = document.createElement("div");
-      holderEl.style.display = "none";
-
-      const id = row.getData().noid_produk;
-
-      holderEl.style.boxSizing = "border-box";
-      holderEl.style.padding = "10px 30px 10px 10px";
-      holderEl.style.borderTop = "1px solid #333";
-      holderEl.style.borderBotom = "1px solid #333";
-      holderEl.setAttribute("class", "subTable" + id + "");
-
-      tableEl.style.border = "1px solid #333";
-      tableEl.style.display = "none";
-      tableEl.setAttribute("class", "subTable" + id + "");
-
-      holderEl.appendChild(tableEl);
-
-      row.getElement().appendChild(holderEl);
-
-      subTable = new Tabulator(tableEl, {
-        printAsHtml: true,
-        printStyled: true,
-        rowHeight: "25px",
-        responsiveLayout: "collapse",
-        layout: "fitColumns",
-        data: row.getData().serviceHistory,
-        columns: [
-          // For HTML table
-          {
-            formatter: "responsiveCollapse",
-            width: 40,
-            minWidth: 30,
-            hozAlign: "center",
-            resizable: false,
-            headerSort: false,
-          },
-          {
-            title: "GAMBAR & ID",
-            minWidth: 100,
-            responsive: 0,
-            field: "id_varian",
-            hozAlign: "left",
-            vertAlign: "middle",
-            print: false,
-            download: false,
-            formatter(cell) {
-              return `<div class=" text-center p-auto">
-                <div class="mb-2">
-        <img decoding="async" loading="lazy"
-          src="${getImgUrl(cell.getData().gambar_varian)}"
-          alt="${cell.getData().gambar_varian}"
-          data-action="zoom"
-          class="w-20 rounded-md"
-          width="100" height="100"
-        />
-      </div>
-      <div>
-        ${cell.getData().id_varian}
-      </div>
-              </div>`;
-            },
-          },
-          {
-            title: "NAMA TRAVEL",
-            minWidth: 100,
-            responsive: 0,
-            field: "nama_travel",
-            hozAlign: "center",
-            vertAlign: "middle",
-            print: false,
-            download: false,
-            formatter(cell) {
-              return `<div>
-                <div class="font-medium whitespace-nowrap">${
-                  cell.getData().nama_travel
-                }</div>
-              </div>`;
-            },
-          },
-          {
-            title: "NAMA VARIAN",
-            minWidth: 150,
-            responsive: 0,
-            field: "nama_varian",
-            hozAlign: "center",
-            vertAlign: "middle",
-            print: false,
-            download: false,
-            formatter(cell) {
-              return `<div>
-                <div class="font-medium whitespace-nowrap">${
-                  cell.getData().nama_varian
-                }</div>
-              </div>`;
-            },
-          },
-          {
-            title: "STOK GLOBAL",
-            minWidth: 50,
-            responsive: 0,
-            field: "stok_global",
-            hozAlign: "center",
-            vertAlign: "middle",
-            print: false,
-            download: false,
-            formatter(cell) {
-              return `<div>
-                <div class="font-medium whitespace-nowrap">${
-                  cell.getData().stok_global
-                }</div>
-              </div>`;
-            },
-          },
-          {
-            title: "SATUAN",
-            minWidth: 50,
-            headerHozAlign: "center",
-            field: "nama_satuan",
-            hozAlign: "center",
-            vertAlign: "middle",
-            print: false,
-            download: false,
-            formatter(cell) {
-              return `<div>
-                <div class="font-medium whitespace-nowrap">${
-                  cell.getData().nama_satuan
-                }</div>
-              </div>`;
-            },
-          },
-          {
-            title: "HARGA BELI",
-            headerHozAlign: "center",
-            minWidth: 150,
-            field: "harga_beli_varian",
-            hozAlign: "right",
-            vertAlign: "middle",
-            print: false,
-            download: false,
-            formatter(cell) {
-              return `<div>
-                <div class="font-medium whitespace-nowrap">${currencyFormatter.format(
-                  cell.getData().harga_beli_varian
-                )}</div>
-              </div>`;
-            },
-          },
-          {
-            title: "HARGA JUAL",
-            minWidth: 150,
-            headerHozAlign: "center",
-            field: "harga_jual_varian",
-            hozAlign: "right",
-            vertAlign: "middle",
-            print: false,
-            download: false,
-            formatter(cell) {
-              return `<div>
-                <div class="font-medium whitespace-nowrap">${currencyFormatter.format(
-                  cell.getData().harga_jual_varian
-                )}</div>
-              </div>`;
-            },
-          },
-          {
-            title: "ACTIONS",
-            headerHozAlign: "center",
-            minWidth: 200,
-            field: "actions",
-            responsive: 1,
-            hozAlign: "center",
-            vertAlign: "middle",
-            print: false,
-            download: false,
-            formatter(cell) {
-              const a = dom(`<div class="flex lg:justify-center items-center">
-                <a id="edit" class="flex items-center mr-3" href="javascript:;">
-                  <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit
-                </a>
-                <a id="delete" class="flex items-center text-danger" href="javascript:;">
-                  <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
-                </a>
-              </div>`);
-              dom(a).on("click", "a", function (e) {
-                if (e.id === "edit") {
-                  const varian = cell.getData();
-                  url.value = getImgUrl(varian.gambar_varian);
-                  Dashboard.updateVarianGet(varian.id_varian)
-                    .then((detail) => {
-                      console.log("detail", detail);
-                      data.value = detail;
-                      gambar_lama.value = detail.item.gambar_varian;
-                      file.value = "";
-                      inputIdVarian.value = detail.item.id_varian;
-                      inputNamaVarian.value = detail.item.nama_varian;
-                      kategoriDashboardVarian.value = detail.item.noid_produk;
-                      satuanVarian.value = detail.item.id_satuan;
-                      kategoriGudangVarian.value = detail.item.id_gudang;
-                      stokGlobal.value = detail.item.stok_global;
-                      stokTerpakai.value = detail.item.stok_terpakai;
-                      hargaBeliVarian.value = detail.item.harga_beli_varian;
-                      hargaJualVarian.value = detail.item.harga_jual_varian;
-                      isEdit.value = true;
-                      modalVarian.value = true;
-                    })
-                    .catch((e) => {
-                      alert("Error edit Get " + e);
-                    });
-                } else {
-                  const varian = cell.getData();
-                  inputIdVarian.value = varian.id_varian;
-                  inputNamaVarian.value = varian.nama_varian;
-                  gambar_lama.value = varian.gambar_varian;
-                  isVarian.value = true;
-                  deleteConfirmationModal.value = true;
-                }
-              });
-
-              return a[0];
-            },
-          },
-
-          // For print format
-          {
-            title: "ID VARIAN",
-            field: "id_varian",
-            visible: false,
-            print: true,
-            download: true,
-          },
-          {
-            title: "NAMA TRAVEL",
-            field: "nama_travel",
-            visible: false,
-            print: true,
-            download: true,
-          },
-          {
-            title: "NAMA VARIAN",
-            field: "nama_varian",
-            visible: false,
-            print: true,
-            download: true,
-          },
-          {
-            title: "STOK GLOBAL",
-            field: "stok_global",
-            visible: false,
-            print: true,
-            download: true,
-          },
-          {
-            title: "SATUAN",
-            field: "nama_satuan",
-            visible: false,
-            print: true,
-            download: true,
-          },
-          {
-            title: "HARGA BELI",
-            field: "harga_beli_varian",
-            visible: false,
-            print: true,
-            download: true,
-          },
-          {
-            title: "HARGA JUAL",
-            field: "harga_jual_varian",
-            visible: false,
-            print: true,
-            download: true,
-          },
-        ],
-      });
-      subTable.on("renderComplete", function () {
-        createIcons({
-          icons,
-          "stroke-width": 1.5,
-          nameAttr: "data-lucide",
-        });
-      });
-    },
+      {
+        title: "JUMLAH",
+        field: "jumlah",
+        visible: false,
+        print: true,
+        download: true,
+      },
+      {
+        title: "MUTOWIF",
+        field: "mutowif",
+        visible: false,
+        print: true,
+        download: true,
+      },
+    ]
   });
   tabulator.value.on("renderComplete", function () {
     createIcons({
@@ -923,25 +704,11 @@ const initTabulator = () => {
       nameAttr: "data-lucide",
     });
   });
-  tabulator.value.on("rowDblClick", async function (e, row) {
-    const id = row.getData().noid_produk;
-    try {
-      await Dashboard.readVarian(id)
-        .then((data) => {
-          tabulator.value.replaceData(data);
-        })
-        .catch((error) => {
-          throw new Error(error);
-        });
-      $(".subTable" + id + "").toggle();
-    } catch (error) {
-      alert("2click" + error);
-    }
-  });
 
-  tabulator.value.on("rowClick", function (e, row) {
-    const id = row.getData().noid_produk;
-    $(".subTable" + id + "").hide();
+  tabulator.value.on("cellClick", function (e, row) {
+    console.log("cellClick", row);
+    const data = row.getData();
+    Dashboard.getDetail(data)
   });
 };
 const updateData = () => {
