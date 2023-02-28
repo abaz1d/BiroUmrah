@@ -22,15 +22,16 @@ export const useDashboardStore = defineStore({
         const Auth = useAuthStore();
         const { data } = await request.get(
           `${Auth.items.role == "Operator"
-            ? `utama?id_region=${String(Auth.items.id_region)}&date_select=${String(date_select)}`
-            :  `utama?id_region=${String(data_select)}&date_select=${String(date_select)}`
+            ? `produk?id_region=${String(Auth.items.id_region)}&date_select=${String(date_select)}`
+            :  `produk?id_region=${String(data_select)}&date_select=${String(date_select)}`
           }`
         );
+        console.log('read item', date_select, data_select, data.data)
         if (data.success) {
-          this.mainData = data.data.mainData;
-          this.childData = data.data.childData;
-          this.rawRegions = data.data.regions;
-          this.totalAnggota = parseInt(data.data.total.total_anggota);
+          this.mainData = data.data;
+          // this.childData = data.data.childData;
+          // this.rawRegions = data.data.regions;
+          // this.totalAnggota = parseInt(data.data.total.total_anggota);
           return Auth.items;
         }
       } catch (error) {

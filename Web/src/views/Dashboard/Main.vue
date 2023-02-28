@@ -1,101 +1,95 @@
 <template>
-  <div class="grid grid-cols-12 gap-6">
-    <div class="col-span-12 2xl:col-span-9">
-      <div class="grid grid-cols-12 gap-6">
-        <!-- BEGIN: General Report -->
-        <div class="col-span-12 mt-8">
-          <div class="intro-y flex items-center h-10">
-            <div v-if="data.role !== 'Operator'" class=" w-auto rounded-lg flex">
-              <div
-                class="z-30 rounded-l w-auto px-1 flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4 -mr-1">
-                <UsersIcon class="mr-1"/> {{ Dashboard.total_anggota }}
-              </div>
-              <TomSelect v-model="data_select" class="w-full">
-                <option value="kosong" disabled>
-                  --&gt; Total Anggota {{ Dashboard.total_anggota }} dari 35 Kota/ Kab&lt;--
-                </option>
-                <option v-for="region in Dashboard.regions" :key="region.id_region" :region="region"
-                  :value="region.id_region">
-                  {{ region.id_region }} -
-                  {{ region.nama_region }}
-                </option>
-              </TomSelect>
-            </div>
-            <h2 v-else class="text-lg font-medium truncate mr-5">{{ data.id_region }} - {{ data.nama_region }}</h2>
-           
-            <Dropdown class="sm:ml-auto ml-3 btn bg-primary flex items-center" v-show="data.role !== 'Admin'">
-              <DropdownToggle tag="a" href="javascript:;">
-                <PlusIcon class="w-6 h-6 text-white" />
-              </DropdownToggle>
-              <DropdownMenu class="w-40">
-                <DropdownContent>
-                  <DropdownItem @click="openDataModal()">
-                    <PlusIcon class="w-4 h-4 mr-2" /> Tambah Data
-                  </DropdownItem>
-                  <DropdownItem @click="openDetailModal()">
-                    <CalendarPlusIcon class="w-4 h-4 mr-2" /> Tambah Detail
-                  </DropdownItem>
-                </DropdownContent>
-              </DropdownMenu>
-            </Dropdown>
-            <a href="" class="ml-3 flex btn items-center text-primary">
-              <RefreshCcwIcon class="w-4 h-4 mr-3" />
-              <p class="hidden sm:inline-block">Refresh Data</p>
-            </a>
-          </div>
-          <div class="mt-5">
-            <DataList v-if="Dashboard.items.length !== 0" v-for="detail in Dashboard.items" :key="detail.id_utama"
-              :detail="detail" @openModalRemoveData="openModalRemoveData" @updateData="openupdateData" :data="data"/>
-          </div>
+  <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+    <h2 class="text-lg font-medium mr-auto">Dashboard</h2>
+    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+      <button class="btn btn-primary shadow-md mb-3 mr-2 pr-5">
+        <PlusIcon class="w-4 h-4 mr-2" />
+        <p class="hidden xl:block mr-1">Data</p>
+        Baru
+      </button>
 
-        </div>
-        <!-- END: General Report -->
-      </div>
-    </div>
-    <div class="col-span-12 2xl:col-span-3">
-      <div class="2xl:border-l -mb-10 pb-10">
-        <div class="2xl:pl-6 grid grid-cols-12 gap-x-6 2xl:gap-x-0 gap-y-6">
-          <!-- BEGIN: Important Notes -->
-          <div
-            class="col-span-12 xl:col-span-12 xl:col-start-1 xl:row-start-1 2xl:col-start-auto 2xl:row-start-auto mt-3 2xl:mt-8 -mb-5">
-            <div class="intro-x flex items-center h-10">
-              <h2 class="text-lg font-medium truncate mr-auto w-2/4">
-                Detail Data
-              </h2>
-              <div class="relative 2xl:w-2/4 w-56 2xl:mx-auto ml-auto">
-                <div
-                  class="absolute rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500 dark:bg-darkmode-700 dark:border-darkmode-800 dark:text-slate-400">
-                  <CalendarIcon class="w-4 h-4" />
-                </div>
-                <Litepicker v-model="date_select" ref-key="monthDetailSelect" :options="{
-                  autoApply: true,
-                  showWeekNumbers: false,
-                  dropdowns: {
-                    minYear: new Date(Date.now()).getFullYear() - 10,
-                    maxYear: null,
-                    months: true,
-                    years: true,
-                  },
-                }" class="form-control pl-14" />
-              </div>
-            </div>
-            <ChildList v-if="Dashboard.items2.length !== 0" v-for="detail in Dashboard.items2"
-              :key="detail.id_tabel_anggota" :detail="detail" @openModalRemove="openModalRemove"
-              @updateTotalAnggota="openupdateTotalAnggota" :data="data"/>
-          </div>
-          <!-- END: Important Notes -->
-
-        </div>
-      </div>
+      <a href="" class="ml-auto sm:ml-0 btn px-2 h-10 box flex items-center text-primary">
+        <RefreshCcwIcon class="w-4 h-4 sm:mr-3 sm:m-0 m-2" />
+        <p class="sm:block hidden">Reload Data</p>
+      </a>
     </div>
   </div>
-  <div v-show="isLoading" wire:loading
-    class="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-gray-700 opacity-75 flex flex-col items-center justify-center">
-    <Loader2Icon class="motion-safe:animate-spin stroke-[10px] text-white h-12 w-12 mb-4" />
-    <h2 class="text-center text-white text-xl font-semibold">Loading...</h2>
-    <p class="w-1/3 text-center text-white">
-      Ini mungkin memakan waktu beberapa detik, tolong jangan tutup halaman ini.
-    </p>
+  <div class="intro-y box p-5 mt-5">
+    <div class="flex flex-col sm:flex-row sm:items-end xl:items-start">
+      <form id="tabulator-html-filter-form" class="xl:flex sm:mr-auto">
+        <div class="sm:flex items-center sm:mr-4">
+          <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Field</label>
+          <select id="tabulator-html-filter-field" v-model="filter.field"
+            class="form-select w-full 2xl:w-full mt-2 sm:mt-0 sm:w-auto">
+            <option value="id_user">ID User</option>
+            <option value="username">Username</option>
+            <option value="role">Role</option>
+            <option value="nama_region">Region</option>
+            <option value="email_user">Email</option>
+            <option value="password">Password</option>
+          </select>
+        </div>
+        <div class="sm:flex items-center sm:mr-4 mt-2 xl:mt-0">
+          <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Type</label>
+          <select id="tabulator-html-filter-type" v-model="filter.type" class="form-select w-full mt-2 sm:mt-0 sm:w-auto">
+            <option value="like" selected>like</option>
+            <option value="=">=</option>
+            <option value="<">&lt;</option>
+            <option value="<=">&lt;=</option>
+            <option value=">">></option>
+            <option value=">=">>=</option>
+            <option value="!=">!=</option>
+          </select>
+        </div>
+        <div class="sm:flex items-center sm:mr-4 mt-2 xl:mt-0">
+          <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Value</label>
+          <input id="tabulator-html-filter-value" v-model="filter.value" type="text"
+            class="form-control sm:w-40 2xl:w-full mt-2 sm:mt-0" placeholder="Search..." />
+        </div>
+        <div class="mt-2 xl:mt-0">
+          <button id="tabulator-html-filter-go" type="button" class="btn btn-primary w-full sm:w-16" @click="onFilter">
+            Go
+          </button>
+          <button id="tabulator-html-filter-reset" type="button"
+            class="btn btn-secondary w-full sm:w-16 mt-2 sm:mt-0 sm:ml-1" @click="onResetFilter">
+            Reset
+          </button>
+        </div>
+      </form>
+      <div class="flex mt-5 sm:mt-0">
+        <button id="tabulator-print" class="btn btn-outline-secondary w-1/2 sm:w-auto mr-2" @click="onPrint">
+          <PrinterIcon class="w-4 h-4 mr-2" /> Print
+        </button>
+        <Dropdown class="w-1/2 sm:w-auto">
+          <DropdownToggle class="btn btn-outline-secondary w-full sm:w-auto">
+            <FileTextIcon class="w-4 h-4 mr-2" /> Export
+            <ChevronDownIcon class="w-4 h-4 ml-auto sm:ml-2" />
+          </DropdownToggle>
+          <DropdownMenu class="w-40">
+            <DropdownContent>
+              <DropdownItem @click="onExportCsv">
+                <FileTextIcon class="w-4 h-4 mr-2" /> Export CSV
+              </DropdownItem>
+              <DropdownItem @click="onExportXlsx">
+                <FileTextIcon class="w-4 h-4 mr-2" /> Export XLSX
+              </DropdownItem>
+            </DropdownContent>
+          </DropdownMenu>
+        </Dropdown>
+      </div>
+    </div>
+    <div v-show="isLoading" wire:loading
+      class="fixed top-0 left-0 right-0 bottom-0 w-full h-[50vw] z-50 overflow-hidden bg-gray-700 opacity-75 flex flex-col items-center justify-center">
+      <Loader2Icon class="motion-safe:animate-spin stroke-[10px] text-white h-12 w-12 mb-4" />
+      <h2 class="text-center text-white text-xl font-semibold">Loading...</h2>
+      <p class="w-1/3 text-center text-white">
+        Ini mungkin memakan waktu beberapa detik, tolong jangan tutup halaman
+        ini.
+      </p>
+    </div>
+    <div class="overflow-x-auto scrollbar-hidden">
+      <div id="tabulator" ref="tableRef" class="mt-5 table-report table-report--tabulator"></div>
+    </div>
   </div>
   <!-- BEGIN: Delete Confirmation Modal -->
   <Modal :show="deleteConfirmationModal" @hidden="deleteConfirmationModal = false">
@@ -131,7 +125,7 @@
     </ModalBody>
   </Modal>
   <!-- END: Delete Confirmation Modal -->
-  <Modal backdrop="static" size="modal-xl" :show="ModalData" @hidden="ModalData = false">
+  <!-- <Modal backdrop="static" size="modal-xl" :show="ModalData" @hidden="ModalData = false">
     <ModalHeader>
       <h2 v-if="isEdit" class="font-medium text-base mr-auto">Edit Data {{ more_edit }}</h2>
       <h2 v-else class="font-medium text-base mr-auto">Tambah Data</h2>
@@ -319,7 +313,7 @@
         Simpan
       </button>
     </ModalFooter>
-  </Modal>
+  </Modal> -->
 
   <Modal backdrop="static" size="modal-md" :show="ModalDetail" @hidden="ModalDetail = false">
     <ModalHeader>
@@ -368,13 +362,25 @@
 <script setup>
 import DataList from "./DataList.vue"
 import ChildList from "./ChildList.vue"
+import $ from "jquery";
+import { TabulatorFull as Tabulator } from "tabulator-tables";
 import ModalDatabaseError from "@/components/modal-error/Main.vue";
+import { createIcons, icons } from "lucide";
+import dom from "@left4code/tw-starter/dist/js/dom";
 import { useDashboardStore } from "@/stores/dashboard";
-import { ref, provide, onMounted, watch, onBeforeUnmount } from "vue";
+import { ref, provide, onMounted, watch, reactive } from "vue";
 import moment from "moment";
 import { useAuthStore } from "@/stores/auth";
 const Auth = useAuthStore();
 const isLoading = ref(false);
+const tableRef = ref();
+const tabulator = ref();
+const filter = reactive({
+  field: "noid_produk",
+  type: "like",
+  value: "",
+});
+var subTable
 
 const ModalData = ref(false);
 const ModalDetail = ref(false);
@@ -409,20 +415,20 @@ const input_web = ref("")
 const input_fb = ref("")
 const input_ig = ref("")
 
-provide("bind[dropzoneMultipleRef]", (el) => {
-  dropzoneMultipleRef.value = el;
-});
+// provide("bind[dropzoneMultipleRef]", (el) => {
+//   dropzoneMultipleRef.value = el;
+// });
 
-provide("bind[dropzoneSingleRef]", (el) => {
-  dropzoneSingleRef.value = el;
-});
+// provide("bind[dropzoneSingleRef]", (el) => {
+//   dropzoneSingleRef.value = el;
+// });
 
-provide("bind[monthDetailSelect]", (el) => {
-  monthDetailSelect.value = el;
-});
-provide("bind[monthDetailSelect2]", (el) => {
-  monthDetailSelect2.value = el;
-});
+// provide("bind[monthDetailSelect]", (el) => {
+//   monthDetailSelect.value = el;
+// });
+// provide("bind[monthDetailSelect2]", (el) => {
+//   monthDetailSelect2.value = el;
+// });
 
 const resetModal = () => {
   isLoading.value = false;
@@ -449,8 +455,6 @@ const resetModal = () => {
   input_web.value = ""
   input_fb.value = ""
   input_ig.value = ""
-  dropzoneMultipleRef.value.dropzone.removeAllFiles(true)
-  dropzoneSingleRef.value.dropzone.removeAllFiles(true)
 }
 watch(data_select, async (e) => {
   Dashboard.getData(e, date_select.value)
@@ -502,42 +506,443 @@ const getUrlSurat = (data) => {
   }
 };
 
-const openupdateData = (detail) => {
-  id_utama.value = detail.id_utama
-  input_kota_kabupaten.value = detail.id_region
-  input_alamat.value = detail.alamat
-  input_nomer.value = detail.no_telepon
+const initTabulator = () => {
+  tabulator.value = new Tabulator(tableRef.value, {
+    data: Dashboard.items,
+    printHeader: `<h1 class='text-2xl p-2 m-2 text-center border-y-2 border-black'>Tabel Dashboard<h1>`,
+    printFooter: `<h2 class='p-2 m-2 text-center mt-4'>${moment(
+      Date.now()
+    ).format("DD MMM YYYY HH:SS")}<h2>`,
+    printAsHtml: true,
+    printStyled: true,
+    addRowPos: true,
+    height: "60vh",
+    height: "100%",
+    pagination: "remote",
+    paginationSize: 10,
+    paginationSizeSelector: [10, 20, 30, 40, 50, 100],
+    layout: "fitColumns",
+    responsiveLayout: "collapse",
+    placeholder: "Tida ada Data di temukan",
+    columnDefaults: {
+      resizable: true,
+      tooltip: function (e, cell) {
+        var el = document.createElement("div");
+        el.style.backgroundColor = "white smoke";
+        el.innerText = cell.getColumn().getField() + " - " + cell.getValue();
+        return el;
+      },
+    },
+    columns: [
+      {
+        formatter: "responsiveCollapse",
+        width: 40,
+        minWidth: 30,
+        hozAlign: "center",
+        resizable: false,
+        headerSort: false,
+      },
 
-  let callback = null; // Optional callback when it's done
-  let crossOrigin = null; // Added to the `img` tag for crossOrigin handling
-  let resizeThumbnail = false; // Tells Dropzone whether it should resize the image first
-  if (detail.gambar !== null) {
-    detail.gambar.map((data) => {
-      let url = getUrl(data)
-      let mockFile = { name: url.substring(url.lastIndexOf('/') + 1), size: data.data.toString().length, accepted: true };
-      dropzoneMultipleRef.value.dropzone.displayExistingFile(mockFile, url, callback, crossOrigin, resizeThumbnail);
-    })
-  }
-  file_upload.value = []
+      // For HTML table
+      {
+        title: "ID",
+        minWidth: 200,
+        responsive: 0,
+        field: "noid_produk",
+        vertAlign: "middle",
+        hozAlign: "left",
+        print: false,
+        download: false,
+        formatter(cell) {
+          return `<div>
+                <div class="font-medium whitespace-nowrap">${
+                  cell.getData().noid_produk
+                }</div>
+              </div>`;
+        },
+      },
+      {
+        title: "NAMA TRAVEL",
+        minWidth: 200,
+        responsive: 0,
+        field: "nama_travel",
+        vertAlign: "middle",
+        hozAlign: "center",
+        print: false,
+        download: false,
+        formatter(cell) {
+          return `<div>
+                <div class="font-medium whitespace-nowrap">${
+                  cell.getData().nama_travel
+                }</div>
+              </div>`;
+        },
+      },
+      {
+        title: "ACTIONS",
+        headerHozAlign: "center",
+        minWidth: 200,
+        field: "actions",
+        responsive: 1,
+        hozAlign: "center",
+        vertAlign: "middle",
+        print: false,
+        download: false,
+        formatter(cell) {
+          const a = dom(`<div class="flex lg:justify-center items-center">
+                <a id="edit" class="flex items-center mr-3" href="javascript:;">
+                  <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit
+                </a>
+                <a id="delete" class="flex items-center text-danger" href="javascript:;">
+                  <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                </a>
+              </div>`);
+          dom(a).on("click", "a", function (e) {
+            if (e.id === "edit") {
+              const barang = cell.getData();
+              inputIdDashboard.value = barang.noid_produk;
+              inputNamaDashboard.value = barang.nama_travel;
+              isEdit.value = true;
+              modalDashboard.value = true;
+            } else {
+              inputIdDashboard.value = cell.getData().noid_produk;
+              inputNamaDashboard.value = cell.getData().nama_travel;
+              deleteConfirmationModal.value = true;
+            }
+          });
 
-  if (detail.periode !== null) {
-    start_jabatan.value = moment(detail.periode[0]).format("D MMM, YYYY")
-    end_jabatan.value = moment(detail.periode[1]).format("D MMM, YYYY")
-  }
+          return a[0];
+        },
+      },
 
-  if (detail.file_sk !== null) {
-    let url = getUrlSurat(detail.file_sk)
-    let mockFile = { name: url.substring(url.lastIndexOf('/') + 1), size: detail.file_sk.data.toString().length, accepted: true };
-    dropzoneSingleRef.value.dropzone.displayExistingFile(mockFile, url, callback, crossOrigin, resizeThumbnail);
-  }
-  sk_file.value = ""
-  if (detail.medsos !== null) {
-    input_web.value = detail.medsos[0]
-    input_fb.value = detail.medsos[1]
-    input_ig.value = detail.medsos[2]
-  }
-  isEdit.value = true;
-  ModalData.value = true;
+      // For print format
+      {
+        title: "ID",
+        field: "noid_produk",
+        visible: false,
+        print: true,
+        download: true,
+      },
+      {
+        title: "NAMA TRAVEL",
+        field: "nama_travel",
+        visible: false,
+        print: true,
+        download: true,
+      },
+    ],
+    rowFormatter: function (row) {
+      var holderEl = document.createElement("div");
+      var tableEl = document.createElement("div");
+      holderEl.style.display = "none";
+
+      const id = row.getData().noid_produk;
+
+      holderEl.style.boxSizing = "border-box";
+      holderEl.style.padding = "10px 30px 10px 10px";
+      holderEl.style.borderTop = "1px solid #333";
+      holderEl.style.borderBotom = "1px solid #333";
+      holderEl.setAttribute("class", "subTable" + id + "");
+
+      tableEl.style.border = "1px solid #333";
+      tableEl.style.display = "none";
+      tableEl.setAttribute("class", "subTable" + id + "");
+
+      holderEl.appendChild(tableEl);
+
+      row.getElement().appendChild(holderEl);
+
+      subTable = new Tabulator(tableEl, {
+        printAsHtml: true,
+        printStyled: true,
+        rowHeight: "25px",
+        responsiveLayout: "collapse",
+        layout: "fitColumns",
+        data: row.getData().serviceHistory,
+        columns: [
+          // For HTML table
+          {
+            formatter: "responsiveCollapse",
+            width: 40,
+            minWidth: 30,
+            hozAlign: "center",
+            resizable: false,
+            headerSort: false,
+          },
+          {
+            title: "GAMBAR & ID",
+            minWidth: 100,
+            responsive: 0,
+            field: "id_varian",
+            hozAlign: "left",
+            vertAlign: "middle",
+            print: false,
+            download: false,
+            formatter(cell) {
+              return `<div class=" text-center p-auto">
+                <div class="mb-2">
+        <img decoding="async" loading="lazy"
+          src="${getImgUrl(cell.getData().gambar_varian)}"
+          alt="${cell.getData().gambar_varian}"
+          data-action="zoom"
+          class="w-20 rounded-md"
+          width="100" height="100"
+        />
+      </div>
+      <div>
+        ${cell.getData().id_varian}
+      </div>
+              </div>`;
+            },
+          },
+          {
+            title: "NAMA TRAVEL",
+            minWidth: 100,
+            responsive: 0,
+            field: "nama_travel",
+            hozAlign: "center",
+            vertAlign: "middle",
+            print: false,
+            download: false,
+            formatter(cell) {
+              return `<div>
+                <div class="font-medium whitespace-nowrap">${
+                  cell.getData().nama_travel
+                }</div>
+              </div>`;
+            },
+          },
+          {
+            title: "NAMA VARIAN",
+            minWidth: 150,
+            responsive: 0,
+            field: "nama_varian",
+            hozAlign: "center",
+            vertAlign: "middle",
+            print: false,
+            download: false,
+            formatter(cell) {
+              return `<div>
+                <div class="font-medium whitespace-nowrap">${
+                  cell.getData().nama_varian
+                }</div>
+              </div>`;
+            },
+          },
+          {
+            title: "STOK GLOBAL",
+            minWidth: 50,
+            responsive: 0,
+            field: "stok_global",
+            hozAlign: "center",
+            vertAlign: "middle",
+            print: false,
+            download: false,
+            formatter(cell) {
+              return `<div>
+                <div class="font-medium whitespace-nowrap">${
+                  cell.getData().stok_global
+                }</div>
+              </div>`;
+            },
+          },
+          {
+            title: "SATUAN",
+            minWidth: 50,
+            headerHozAlign: "center",
+            field: "nama_satuan",
+            hozAlign: "center",
+            vertAlign: "middle",
+            print: false,
+            download: false,
+            formatter(cell) {
+              return `<div>
+                <div class="font-medium whitespace-nowrap">${
+                  cell.getData().nama_satuan
+                }</div>
+              </div>`;
+            },
+          },
+          {
+            title: "HARGA BELI",
+            headerHozAlign: "center",
+            minWidth: 150,
+            field: "harga_beli_varian",
+            hozAlign: "right",
+            vertAlign: "middle",
+            print: false,
+            download: false,
+            formatter(cell) {
+              return `<div>
+                <div class="font-medium whitespace-nowrap">${currencyFormatter.format(
+                  cell.getData().harga_beli_varian
+                )}</div>
+              </div>`;
+            },
+          },
+          {
+            title: "HARGA JUAL",
+            minWidth: 150,
+            headerHozAlign: "center",
+            field: "harga_jual_varian",
+            hozAlign: "right",
+            vertAlign: "middle",
+            print: false,
+            download: false,
+            formatter(cell) {
+              return `<div>
+                <div class="font-medium whitespace-nowrap">${currencyFormatter.format(
+                  cell.getData().harga_jual_varian
+                )}</div>
+              </div>`;
+            },
+          },
+          {
+            title: "ACTIONS",
+            headerHozAlign: "center",
+            minWidth: 200,
+            field: "actions",
+            responsive: 1,
+            hozAlign: "center",
+            vertAlign: "middle",
+            print: false,
+            download: false,
+            formatter(cell) {
+              const a = dom(`<div class="flex lg:justify-center items-center">
+                <a id="edit" class="flex items-center mr-3" href="javascript:;">
+                  <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit
+                </a>
+                <a id="delete" class="flex items-center text-danger" href="javascript:;">
+                  <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                </a>
+              </div>`);
+              dom(a).on("click", "a", function (e) {
+                if (e.id === "edit") {
+                  const varian = cell.getData();
+                  url.value = getImgUrl(varian.gambar_varian);
+                  Dashboard.updateVarianGet(varian.id_varian)
+                    .then((detail) => {
+                      console.log("detail", detail);
+                      data.value = detail;
+                      gambar_lama.value = detail.item.gambar_varian;
+                      file.value = "";
+                      inputIdVarian.value = detail.item.id_varian;
+                      inputNamaVarian.value = detail.item.nama_varian;
+                      kategoriDashboardVarian.value = detail.item.noid_produk;
+                      satuanVarian.value = detail.item.id_satuan;
+                      kategoriGudangVarian.value = detail.item.id_gudang;
+                      stokGlobal.value = detail.item.stok_global;
+                      stokTerpakai.value = detail.item.stok_terpakai;
+                      hargaBeliVarian.value = detail.item.harga_beli_varian;
+                      hargaJualVarian.value = detail.item.harga_jual_varian;
+                      isEdit.value = true;
+                      modalVarian.value = true;
+                    })
+                    .catch((e) => {
+                      alert("Error edit Get " + e);
+                    });
+                } else {
+                  const varian = cell.getData();
+                  inputIdVarian.value = varian.id_varian;
+                  inputNamaVarian.value = varian.nama_varian;
+                  gambar_lama.value = varian.gambar_varian;
+                  isVarian.value = true;
+                  deleteConfirmationModal.value = true;
+                }
+              });
+
+              return a[0];
+            },
+          },
+
+          // For print format
+          {
+            title: "ID VARIAN",
+            field: "id_varian",
+            visible: false,
+            print: true,
+            download: true,
+          },
+          {
+            title: "NAMA TRAVEL",
+            field: "nama_travel",
+            visible: false,
+            print: true,
+            download: true,
+          },
+          {
+            title: "NAMA VARIAN",
+            field: "nama_varian",
+            visible: false,
+            print: true,
+            download: true,
+          },
+          {
+            title: "STOK GLOBAL",
+            field: "stok_global",
+            visible: false,
+            print: true,
+            download: true,
+          },
+          {
+            title: "SATUAN",
+            field: "nama_satuan",
+            visible: false,
+            print: true,
+            download: true,
+          },
+          {
+            title: "HARGA BELI",
+            field: "harga_beli_varian",
+            visible: false,
+            print: true,
+            download: true,
+          },
+          {
+            title: "HARGA JUAL",
+            field: "harga_jual_varian",
+            visible: false,
+            print: true,
+            download: true,
+          },
+        ],
+      });
+      subTable.on("renderComplete", function () {
+        createIcons({
+          icons,
+          "stroke-width": 1.5,
+          nameAttr: "data-lucide",
+        });
+      });
+    },
+  });
+  tabulator.value.on("renderComplete", function () {
+    createIcons({
+      icons,
+      "stroke-width": 1.5,
+      nameAttr: "data-lucide",
+    });
+  });
+  tabulator.value.on("rowDblClick", async function (e, row) {
+    const id = row.getData().noid_produk;
+    try {
+      await Dashboard.readVarian(id)
+        .then((data) => {
+          tabulator.value.replaceData(data);
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+      $(".subTable" + id + "").toggle();
+    } catch (error) {
+      alert("2click" + error);
+    }
+  });
+
+  tabulator.value.on("rowClick", function (e, row) {
+    const id = row.getData().noid_produk;
+    $(".subTable" + id + "").hide();
+  });
 };
 const updateData = () => {
   Dashboard.updateData(id_utama.value, input_kota_kabupaten.value,
@@ -603,46 +1008,56 @@ const removeItem = (e) => {
   resetModal();
 }
 
+// Redraw table onresize
+const reInitOnResizeWindow = () => {
+  window.addEventListener("resize", () => {
+    tabulator.value.redraw();
+    createIcons({
+      icons,
+      "stroke-width": 1.5,
+      nameAttr: "data-lucide",
+    });
+  });
+};
+
+// Filter function
+const onFilter = () => {
+  tabulator.value.setFilter(filter.field, filter.type, filter.value);
+};
+
+// On reset filter
+const onResetFilter = () => {
+  filter.field = "noid_produk";
+  filter.type = "like";
+  filter.value = "";
+  onFilter();
+};
+
+// Export
+const onExportCsv = () => {
+  tabulator.value.download("csv", "data.csv");
+};
+
+const onExportXlsx = () => {
+  const win = window;
+  win.XLSX = xlsx;
+  tabulator.value.download("xlsx", "data.xlsx", {
+    sheetName: "Products",
+  });
+};
+// Print
+const onPrint = () => {
+  tabulator.value.print();
+};
+
 onMounted(async function () {
-  const elDropzoneMultipleRef = dropzoneMultipleRef.value;
-  elDropzoneMultipleRef.dropzone.on("addedfile", (e) => {
-    file_upload.value.push(e)
-  });
-  elDropzoneMultipleRef.dropzone.on("removedfile", (e) => {
-    file_upload.value = file_upload.value.filter((item) => { return item.name != e.name })
-  });
-  elDropzoneMultipleRef.dropzone.on("error", () => {
-    alert("Maksimal 3 Gambar");
-  });
 
-  const elDropzoneSingleRef = dropzoneSingleRef.value;
-  elDropzoneSingleRef.dropzone.on("addedfile", (e) => {
-    sk_file.value = e
-  });
-  elDropzoneSingleRef.dropzone.on("removedfile", () => {
-    sk_file.value = ""
-  });
-  elDropzoneSingleRef.dropzone.on("error", () => {
-    alert("Maksimal 1 File");
-  });
 
-  const elmonthDetailSelect = monthDetailSelect.value;
-  elmonthDetailSelect.Litepicker.on('render:day', (day, date) => {
-    if (date.getDate() !== 1) {
-      day.classList.add("is-locked")
-      day.setAttribute('tabindex', -1);
-    }
-  });
-  const elmonthDetailSelect2 = monthDetailSelect2.value;
-  elmonthDetailSelect2.Litepicker.on('render:day', (day, date) => {
-    if (date.getDate() !== 1) {
-      day.classList.add("is-locked")
-      day.setAttribute('tabindex', -1);
-    }
-  });
   try {
     isLoading.value = true;
     data.value = await Dashboard.readItem(date_select.value, data_select.value);
+    initTabulator();
+    reInitOnResizeWindow();
     isLoading.value = false;
   } catch (error) {
     console.error(error);
