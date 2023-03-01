@@ -20,33 +20,39 @@
                   {{ detail.nama_travel }}
                 </p>
               </div>
+              <hr>
               <div class="flex items-center mt-2">
                 <PocketIcon class="ml-4 w-4 h-4 mr-2" /> Paket Layanan : <p class="inline-block ml-auto mr-4">
                   {{ detail.paket }}
                 </p>
               </div>
+              <hr>
               <div class="flex items-center mt-2">
                 <ContactIcon class="ml-4 w-4 h-4 mr-2" /> Nama Mutowif : <p class="inline-block ml-auto mr-4">
                   {{ detail.mutowif }}
                 </p>
               </div>
+              <hr>
               <div class="flex items-center mt-2">
                 <MapIcon class="ml-4 w-4 h-4 mr-2" /> Rute Perjalanan : <p class="inline-block ml-auto mr-4">
                   {{ detail.rute }}
                 </p>
               </div>
+              <hr>
               <div class="flex items-center mt-2">
                 <HomeIcon class="ml-4 w-4 h-4 mr-2" /> Room : <p class="inline-block ml-auto mr-4">
                   {{ detail.room }}
                 </p>
               </div>
+              <hr>
               <div class="flex items-center mt-2">
                 <CalendarRangeIcon class="ml-4 w-4 h-4 mr-2" /> Tanggal Berangkat & Pulang : <p
                   class="inline-block ml-auto mr-4">
                   {{ moment(detail.tanggal).format("DD MMM") + " - " + moment(detail.pulang).format("DD MMM YYYY") }}
                 </p>
               </div>
-              <div class="flex items-center my-2">
+              <hr>
+              <div class="flex items-center mt-2">
                 <UsersIcon class="ml-4 w-4 h-4 mr-2" /> Total Jumlah Jamaah : <p class="inline-block ml-auto mr-4">
                   {{ detail.jumlah }} Orang
                 </p>

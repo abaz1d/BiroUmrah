@@ -16,21 +16,21 @@
           <img
             width="100"
             height="100"
-            alt="Biro OKK Jateng HTML"
-            class="w-6 block dark:hidden"
-            src="@/assets/images/logo.svg"
+            alt="Biro Umrah Jateng HTML"
+            class="w-6 h-6 block dark:hidden"
+            src="@/assets/images/logo.png"
           />
           <img
             width="100"
             height="100"
-            alt="Biro OKK Jateng HTML"
+            alt="Biro Umrah Jateng HTML"
             class="w-6 hidden dark:block"
-            src="@/assets/images/logo-gold.svg"
+            src="@/assets/images/logo.png"
           />
           <span
             class="font-philosopher text-white dark:text-[#CDA562] text-xl ml-3"
           >
-            <b> Biro OKK Jateng </b>
+            <b> Biro Umrah Jateng </b>
           </span>
         </RouterLink>
         <!-- END: Logo -->

@@ -8,18 +8,18 @@
       <nav class="side-nav side-nav--simple">
         <a href="" class="intro-x flex items-center pl-5 pt-4">
           <img
-            alt="Biro OKK Jateng HTML"
-            class="w-6 block dark:hidden"
-            src="@/assets/images/logo.svg"
+            alt="Biro Umrah Jateng HTML"
+            class="w-6 h-6 block dark:hidden"
+            src="@/assets/images/logo.png"
             width="100"
             height="100"
           />
           <img
             width="100"
             height="100"
-            alt="Biro OKK Jateng HTML"
+            alt="Biro Umrah Jateng HTML"
             class="w-6 hidden dark:block"
-            src="@/assets/images/logo-gold.svg"
+            src="@/assets/images/logo.png"
           />
         </a>
         <div class="side-nav__devider my-6"></div>

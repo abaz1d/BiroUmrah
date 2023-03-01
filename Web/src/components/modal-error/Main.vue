@@ -24,7 +24,7 @@
       >
         <a  href="https://api.whatsapp.com/send/?phone=%2B6281548993484&text=Database+aplikasi+POS+mengalami+masalah+&type=phone_number&app_absent=0" class="text-primary"
           >&gt; Hubungi
-          <b class="font-philosopher text-base text-[#CDA562]">Biro OKK Jateng</b>
+          <b class="font-philosopher text-base text-[#CDA562]">Biro Umrah Jateng</b>
           &lt;</a
         >
       </div>

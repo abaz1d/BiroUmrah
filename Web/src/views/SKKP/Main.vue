@@ -14,23 +14,23 @@
           </div>
           <div class="my-auto">
             <img
-              alt="Biro OKK Jateng HTML"
+              alt="Biro Umrah Jateng HTML"
               width="100"
               height="100"
               class="-intro-x w-1/2 -mt-16 fill-[#CDA562] hidden dark:block"
-              src="@/assets/images/logo-gold.svg"
+              src="@/assets/images/logo.png"
             />
             <img
-              alt="Biro OKK Jateng HTML"
+              alt="Biro Umrah Jateng HTML"
               width="100"
               height="100"
               class="-intro-x w-1/2 -mt-16 fill-white block dark:hidden"
-              src="@/assets/images/logo.svg"
+              src="@/assets/images/logo.png"
             />
             <div
               class="intro-x font-philosopher text-white dark:text-[#CDA562] font-medium ml-16 text-4xl leading-tight mt-10"
             >
-              <b> Biro OKK Jateng </b>
+              <b> Biro Umrah Jateng </b>
             </div>
             <div
               class="intro-x mt-5 font-philosopher text-2xl text-white ml-[120px] dark:text-[#CDA562]"
@@ -47,18 +47,18 @@
           >
             <div class="xl:hidden">
               <img
-                alt="Biro OKK Jateng HTML"
+                alt="Biro Umrah Jateng HTML"
                 width="100"
                 height="100"
                 class="intro-x -mt-[120px] mb-3 text-slate-400 xl:hidden text-center w-1/5 mx-auto hidden dark:block"
-                src="@/assets/images/logo-gold.svg"
+                src="@/assets/images/logo.png"
               />
               <img
-                alt="Biro OKK Jateng HTML"
+                alt="Biro Umrah Jateng HTML"
                 width="100"
                 height="100"
                 class="intro-x -mt-[120px] mb-3 text-slate-400 xl:hidden text-center w-1/5 mx-auto block dark:hidden"
-                src="@/assets/images/logo.svg"
+                src="@/assets/images/logo.png"
               />
             </div>
             <h3 class="intro-x font-bold text-2xl text-center mt-8">

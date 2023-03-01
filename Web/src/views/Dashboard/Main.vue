@@ -130,195 +130,6 @@
     </ModalBody>
   </Modal>
   <!-- END: Delete Confirmation Modal -->
-  <!-- <Modal backdrop="static" size="modal-xl" :show="ModalData" @hidden="ModalData = false">
-    <ModalHeader>
-      <h2 v-if="isEdit" class="font-medium text-base mr-auto">Edit Data {{ more_edit }}</h2>
-      <h2 v-else class="font-medium text-base mr-auto">Tambah Data</h2>
-    </ModalHeader>
-    <ModalBody>
-      <form @submit.prevent="!isEdit ? addData() : updateData()" id="DataForm">
-        <div class="text-slate-600 dark:text-slate-500 leading-relaxed text-center px-5">
-          <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/4">
-              <label
-                class="block text-center sm:text-left text-gray-600 dark:text-white font-bold md:text-left mb-1 md:mb-0 sm:pr-4"
-                for="inline-full-name">
-                Kota / Kabupaten
-              </label>
-            </div>
-            <div class="md:w-3/4">
-              <input type="text" placeholder="Nama Kota/ kabupaten" v-model="input_kota_kabupaten" disabled
-                class="w-full sm:pl-3 sm:text-left text-center text-sm border-0 border-b-2 border-gray-400 rounded-md dark:border-white dark:text-black outline-none focus:border-blue-400" />
-            </div>
-          </div>
-          <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/4">
-              <label
-                class="block text-center sm:text-left text-gray-600 dark:text-white font-bold md:text-left mb-1 md:mb-0 sm:pr-4"
-                for="inline-password">
-                Alamat Sekretariatan
-              </label>
-            </div>
-            <div class="md:w-3/4">
-              <textarea type="text" placeholder="Alamat Sekretariatan" v-model="input_alamat"
-                class="w-full sm:pl-3 sm:text-left text-center text-sm border-0 border-b-2 border-gray-400 rounded-md dark:border-white dark:text-black outline-none focus:border-blue-400"></textarea>
-            </div>
-          </div>
-          <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/4">
-              <label
-                class="block text-center sm:text-left text-gray-600 dark:text-white font-bold md:text-left mb-1 md:mb-0 sm:pr-4"
-                for="inline-full-name">
-                No Telepon / WA
-              </label>
-            </div>
-            <div class="md:w-3/4">
-              <input type="text" placeholder="No Telepon / WA" v-model="input_nomer"
-                class="w-full sm:pl-3 sm:text-left text-center text-sm border-0 border-b-2 border-gray-400 rounded-md dark:border-white dark:text-black outline-none focus:border-blue-400" />
-            </div>
-          </div>
-          <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/4">
-              <label
-                class="block text-center sm:text-left text-gray-600 dark:text-white font-bold md:text-left mb-1 md:mb-0 sm:pr-4"
-                for="inline-full-name">
-                Masa Kepengurusan
-              </label>
-            </div>
-            <div class="md:w-3/4">
-              <Litepicker v-model="start_jabatan" :options="{
-                autoApply: true,
-                dropdowns: {
-                  minYear: new Date(Date.now()).getFullYear() - 10,
-                  maxYear: new Date(Date.now()).getFullYear() + 10,
-                  months: true,
-                  years: true,
-                },
-              }"
-                class="w-1/3 sm:pl-3 sm:text-left text-center text-sm border-0 border-b-2 border-gray-400 rounded-md dark:border-white dark:text-black outline-none focus:border-blue-400" />
-              <p class="w-1/3 mx-auto inline-block">s.d.</p>
-              <Litepicker v-model="end_jabatan" :options="{
-                autoApply: true,
-                dropdowns: {
-                  minYear: new Date(Date.now()).getFullYear() - 10,
-                  maxYear: new Date(Date.now()).getFullYear() + 10,
-                  months: true,
-                  years: true,
-                },
-              }"
-                class="w-1/3 sm:pl-3 sm:text-left text-center text-sm border-0 border-b-2 border-gray-400 rounded-md dark:border-white dark:text-black outline-none focus:border-blue-400" />
-            </div>
-          </div>
-          <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/4">
-              <label
-                class="block text-center sm:text-left text-gray-600 dark:text-white font-bold md:text-left mb-1 md:mb-0 sm:pr-4"
-                for="inline-full-name">
-                Foto Kantor & Plang Nama
-              </label>
-            </div>
-            <div class="md:w-3/4">
-              <div
-                class="w-full sm:p-3 py-1 sm:text-left text-center text-sm border-0 border-b-2 border-gray-400 rounded-md dark:border-white dark:text-white  outline-none focus:border-blue-400">
-                <Dropzone ref-key="dropzoneMultipleRef" :options="{
-                  url: 'https://httpbin.org/post',
-                  acceptedFiles: 'image/*',
-                  thumbnailWidth: 150,
-                  maxFilesize: 1.5,
-                  maxFiles: 3,
-                  addRemoveLinks: true,
-                  headers: { 'Access-Control-Allow-Headers': 'Authorization, Content-Type, Accept, X-Mashape-Authorization' },
-                }" class="dropzone">
-                  <UploadIcon class="w-10 h-10 mx-auto -mt-8" />
-                  <div class="text-lg font-medium">
-                    Drop files here or click to upload.
-                  </div>
-                  <div class="text-gray-600 dark:text-white -mb-8">
-                    Maks 3 Foto, Urutan File, Mulai dari kiri <br>
-                    <span class="font-medium">Tampak Depan, Tampak Belakang, Plang Nama</span>.
-                  </div>
-                </Dropzone>
-                <small v-if="isEdit">* Untuk Merubah Foto, HAPUS SEMUA Foto Lama terlebih dahulu</small>
-              </div>
-            </div>
-          </div>
-          <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/4">
-              <label
-                class="block text-center sm:text-left text-gray-600 dark:text-white font-bold md:text-left mb-1 md:mb-0 sm:pr-4"
-                for="inline-full-name">
-                Softfile SK
-              </label>
-            </div>
-            <div class="relative md:w-3/4">
-              <div
-                class="w-full sm:p-3 py-1 sm:text-left text-center text-sm border-0 border-b-2 border-gray-400 rounded-md dark:border-white dark:text-white  outline-none focus:border-blue-400">
-                <Dropzone ref-key="dropzoneSingleRef" :options="{
-                  url: 'https://httpbin.org/post',
-                  acceptedFiles: 'application/pdf',
-                  thumbnailWidth: 150,
-                  addRemoveLinks: true,
-                  maxFilesize: 1.5,
-                  maxFiles: 1,
-                  headers: { 'Access-Control-Allow-Headers': 'Authorization, Content-Type, Accept, X-Mashape-Authorization' },
-                }" class="dropzone">
-                  <UploadIcon class="w-10 h-10 mx-auto -mt-8" />
-                  <div class="text-lg font-medium">
-                    Drop files here or click to upload.
-                  </div>
-                  <div class="text-gray-600 dark:text-white -mb-10">
-                    <span class="font-medium">File PDF</span>.
-                  </div>
-                </Dropzone>
-                <small v-if="isEdit">* Untuk Merubah File, HAPUS File terlebih dahulu</small>
-              </div>
-            </div>
-          </div>
-          <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/4">
-              <label
-                class="block text-center sm:text-left text-gray-600 dark:text-white font-bold md:text-left mb-1 md:mb-0 sm:pr-4"
-                for="inline-full-name">
-                Akun Media Sosial
-              </label>
-            </div>
-            <div class="relative md:w-1/4">
-              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <LinkIcon class="w-5 h-5 text-gray-500 dark:text-gray-400" />
-              </div>
-              <input v-model="input_web"
-                class="w-full pl-10 text-left py-2 text-sm border-0 border-b-2 border-gray-400 rounded-md dark:border-white dark:text-black outline-none focus:border-blue-400"
-                type="text" placeholder="Alamat Website" />
-            </div>
-            <div class="relative md:w-1/4">
-              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <FacebookIcon class="w-5 h-5 text-gray-500 dark:text-gray-400" />
-              </div>
-              <input v-model="input_fb"
-                class="w-full pl-10 text-left py-2 text-sm border-0 border-b-2 border-gray-400 rounded-md dark:border-white dark:text-black outline-none focus:border-blue-400"
-                type="text" placeholder="Nama Akun Facebook" />
-            </div>
-            <div class="relative md:w-1/4">
-              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <InstagramIcon class="w-5 h-5 text-gray-500 dark:text-gray-400" />
-              </div>
-              <input v-model="input_ig"
-                class="w-full pl-10 text-left py-2 text-sm border-0 border-b-2 border-gray-400 rounded-md dark:border-white dark:text-black outline-none focus:border-blue-400"
-                type="text" placeholder="Nama Akun Instagram" />
-            </div>
-          </div>
-        </div>
-      </form>
-    </ModalBody>
-    <ModalFooter class="text-right">
-      <button type="button" @click="resetModal()" class="btn btn-outline-secondary w-32 mr-1">
-        Cancel
-      </button>
-      <button type="submit" form="DataForm" class="btn btn-primary w-32">
-        Simpan
-      </button>
-    </ModalFooter>
-  </Modal> -->
 
   <Modal backdrop="static" size="modal-md" :show="ModalDetail" @hidden="ModalDetail = false">
     <ModalHeader>
@@ -645,15 +456,17 @@ const initTabulator = () => {
               </div>`);
           dom(a).on("click", "a", function (e) {
             if (e.id === "edit") {
-              const barang = cell.getData();
-              inputIdDashboard.value = barang.noid_produk;
-              inputNamaDashboard.value = barang.nama_travel;
-              isEdit.value = true;
-              modalDashboard.value = true;
+              // const barang = cell.getData();
+              // inputIdDashboard.value = barang.noid_produk;
+              // inputNamaDashboard.value = barang.nama_travel;
+              // isEdit.value = true;
+              // modalDashboard.value = true;
+              alert("Fitur Edit Belum berjalan")
             } else {
-              inputIdDashboard.value = cell.getData().noid_produk;
-              inputNamaDashboard.value = cell.getData().nama_travel;
-              deleteConfirmationModal.value = true;
+              // inputIdDashboard.value = cell.getData().noid_produk;
+              // inputNamaDashboard.value = cell.getData().nama_travel;
+              // deleteConfirmationModal.value = true;
+              alert("Fitur Delete Belum berjalan")
             }
           });
 

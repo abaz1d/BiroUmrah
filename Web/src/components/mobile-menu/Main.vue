@@ -9,9 +9,9 @@
     <div class="mobile-menu-bar">
       <a href="" class="flex mr-auto">
         <img
-          alt="Biro OKK Jateng HTML"
+          alt="Biro Umrah Jateng HTML"
           class="w-6"
-          src="@/assets/images/logo.svg"
+          src="@/assets/images/logo.png"
           width="100"
           height="100"
         />
