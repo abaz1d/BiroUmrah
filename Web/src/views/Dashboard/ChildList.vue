@@ -5,8 +5,8 @@
         <div class="box">
           <div class="p-5">
             <div
-              class="h-[200px] before:block before:absolute before:w-full before:h-full before:top-0 before:left-0 before:z-10 before:bg-gradient-to-t before:from-black/90 before:to-black/10 image-fit">
-              <img alt="Midone Tailwind HTML Admin Template" class="rounded-t-md" :src="getUrl(detail)" />
+              class="h-[200px] before:block before:absolute before:w-full before:h-full before:top-0 before:left-0 before:z-10 before:bg-gradient-to-t before:from-black/90 before:to-black/10 image-fit rounded-md">
+              <img alt="Midone Tailwind HTML Admin Template" class="rounded-md" :src="getUrl(detail)" />
               <div class="absolute bottom-0 text-white px-5 pb-6 z-10">
                 <a href="" class="block font-medium text-xl uppercase mb-3">
                   {{ detail.nama_travel }}
@@ -16,19 +16,76 @@
             </div>
             <div class="text-slate-600 dark:text-slate-500 mt-5">
               <div class="flex items-center">
-                <MapIcon class="ml-4 w-4 h-4 mr-2" />Wilayah : <p class="inline-block ml-auto mr-4">
-                  {{ detail.nama_region }}
+                <PlaneIcon class="ml-4 w-4 h-4 mr-2" />Nama Travel : <p class="inline-block ml-auto mr-4 capitalize">
+                  {{ detail.nama_travel }}
                 </p>
               </div>
               <div class="flex items-center mt-2">
-                <CalendarRangeIcon class="ml-4 w-4 h-4 mr-2" /> Periode Bulan : <p class="inline-block ml-auto mr-4">
-                  {{ moment(detail.periode_bulanan).format("MMMM YYYY") }}
+                <PocketIcon class="ml-4 w-4 h-4 mr-2" /> Paket Layanan : <p class="inline-block ml-auto mr-4">
+                  {{ detail.paket }}
                 </p>
               </div>
               <div class="flex items-center mt-2">
-                <UsersIcon class="ml-4 w-4 h-4 mr-2" /> Total Jumlah Anggota : <p class="inline-block ml-auto mr-4">
-                  {{ detail.jumlah_anggota }}
+                <ContactIcon class="ml-4 w-4 h-4 mr-2" /> Nama Mutowif : <p class="inline-block ml-auto mr-4">
+                  {{ detail.mutowif }}
                 </p>
+              </div>
+              <div class="flex items-center mt-2">
+                <MapIcon class="ml-4 w-4 h-4 mr-2" /> Rute Perjalanan : <p class="inline-block ml-auto mr-4">
+                  {{ detail.rute }}
+                </p>
+              </div>
+              <div class="flex items-center mt-2">
+                <HomeIcon class="ml-4 w-4 h-4 mr-2" /> Room : <p class="inline-block ml-auto mr-4">
+                  {{ detail.room }}
+                </p>
+              </div>
+              <div class="flex items-center mt-2">
+                <CalendarRangeIcon class="ml-4 w-4 h-4 mr-2" /> Tanggal Berangkat & Pulang : <p
+                  class="inline-block ml-auto mr-4">
+                  {{ moment(detail.tanggal).format("DD MMM") + " - " + moment(detail.pulang).format("DD MMM YYYY") }}
+                </p>
+              </div>
+              <div class="flex items-center my-2">
+                <UsersIcon class="ml-4 w-4 h-4 mr-2" /> Total Jumlah Jamaah : <p class="inline-block ml-auto mr-4">
+                  {{ detail.jumlah }} Orang
+                </p>
+              </div>
+              <hr>
+              <div class="box my-2 border-dashed border-2 border-primary dark:border-white/50">
+                <div class="flex items-center mt-2">
+                  <MapPinIcon class="ml-4 w-4 h-4 mr-2" /> Status Mekkah : <p class="inline-block ml-auto mr-4">
+                    <input type="checkbox" id="jack" :checked="detail.flag_mk" disabled>
+                  </p>
+                </div>
+                <div class="flex items-center mt-2">
+                  <BuildingIcon class="ml-4 w-4 h-4 mr-2" /> Hotel Mekkah : <p class="inline-block ml-auto mr-4">
+                    {{ detail.hotel_mekah }}
+                  </p>
+                </div>
+                <div class="flex items-center my-2">
+                  <CalendarRangeIcon class="ml-4 w-4 h-4 mr-2" /> IN & OUT Mekkah : <p class="inline-block ml-auto mr-4">
+                    {{ moment(detail.in_mk).format("DD MMM") + " - " + moment(detail.out_mk).format("DD MMM YYYY") }}
+                  </p>
+                </div>
+              </div>
+              <hr>
+              <div class="box my-2 border-dashed border-2 border-primary dark:border-white/50">
+                <div class="flex items-center mt-2">
+                  <MapPinIcon class="ml-4 w-4 h-4 mr-2" /> Status Madinah : <p class="inline-block ml-auto mr-4">
+                    <input type="checkbox" id="jack" :checked="detail.flag_md" disabled>
+                  </p>
+                </div>
+                <div class="flex items-center mt-2">
+                  <BuildingIcon class="ml-4 w-4 h-4 mr-2" /> Hotel Madinah : <p class="inline-block ml-auto mr-4">
+                    {{ detail.hotel_madinah }}
+                  </p>
+                </div>
+                <div class="flex items-center my-2">
+                  <CalendarRangeIcon class="ml-4 w-4 h-4 mr-2" /> IN & OUT Madinah : <p class="inline-block ml-auto mr-4">
+                    {{ moment(detail.in_md).format("DD MMM") + " - " + moment(detail.out_md).format("DD MMM YYYY") }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -66,7 +123,7 @@ export default {
     lokasi: (data) => {
       const item = data.detail
       if (item.flag_md == 1 && item.flag_mk == 1) {
-        if (item.pulang) {
+        if (item.status_pulang == 1) {
           return "KEPULANGAN " + "| " + moment(item.pulang).format("DD MMM YYYY HH:SS")
         } else {
           return "MADINAH " + "| " + moment(item.in_md).format("DD MMM") + " - " + moment(item.out_md).format("DD MMM YYYY")
@@ -76,16 +133,6 @@ export default {
       } else {
         return "KEBERANGKATAN " + "| " + moment(item.tanggal).format("DD MMM YYYY HH:SS")
       }
-    },
-  },
-  data() {
-    return {
-      isi: 'getSel'
-    }
-  },
-  watch: {
-    isi(e) {
-      console.log("ini props nya", e)
     },
   },
   emits: ["openModalRemove", "updateTotalAnggota"],
@@ -101,15 +148,15 @@ export default {
     },
     getUrl(item) {
       if (item.flag_md == 1 && item.flag_mk == 1) {
-        if (item.pulang) {
-          return `${new URL(window.location.origin)}` + "404.png";
+        if (item.status_pulang == 1) {
+          return `${new URL(window.location.origin)}` + "indonesia.png";
         } else {
-          return `${new URL(window.location.origin)}` + "404.png";
+          return `${new URL(window.location.origin)}` + "madhinah.jpeg";
         }
       } else if (item.flag_md == 0 && item.flag_mk == 1) {
-        return `${new URL(window.location.origin)}` + "404.png";
+        return `${new URL(window.location.origin)}` + "mekkah.jpeg";
       } else {
-        return `${new URL(window.location.origin)}` + "404.png";
+        return `${new URL(window.location.origin)}` + "saudiarabia.png";
       }
     }
   },

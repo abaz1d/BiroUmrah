@@ -40,7 +40,6 @@ export const useDashboardStore = defineStore({
     async getDetail(data) {
       try {
         this.childData = [data];
-        console.log("detail", data)
       } catch (error) {
         throw new Error(error)
       }

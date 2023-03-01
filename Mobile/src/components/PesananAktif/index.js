@@ -8,7 +8,7 @@ export default function PesananAktif({ item }) {
   let Icon
   let Waktu
   if (item.flag_md == 1 && item.flag_mk == 1) {
-    if (item.pulang) {
+    if (item.status_pulang == 1) {
       Icon = <IconAirplaneOff />
       Waktu = "KEPULANGAN " + "|" + moment(item.pulang).format("DD MMM YYYY HH:SS")
     } else {

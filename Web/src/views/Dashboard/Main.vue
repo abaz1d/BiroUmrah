@@ -23,12 +23,11 @@
               <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Field</label>
               <select id="tabulator-html-filter-field" v-model="filter.field"
                 class="form-select w-full 2xl:w-full mt-2 sm:mt-0 sm:w-auto">
-                <option value="id_user">ID User</option>
-                <option value="username">Username</option>
-                <option value="role">Role</option>
-                <option value="nama_region">Region</option>
-                <option value="email_user">Email</option>
-                <option value="password">Password</option>
+                <option value="noid_produk">ID</option>
+                <option value="paket">Paket</option>
+                <option value="nama_travel">Nama Travel</option>
+                <option value="jumlah">Jumlah Anggota</option>
+                <option value="mutowif">Mutowif</option>
               </select>
             </div>
             <div class="sm:flex items-center sm:mr-4 mt-2 xl:mt-0">
@@ -50,10 +49,6 @@
                 class="form-control sm:w-40 2xl:w-full mt-2 sm:mt-0" placeholder="Search..." />
             </div>
             <div class="mt-2 xl:mt-0">
-              <button id="tabulator-html-filter-go" type="button" class="btn btn-primary w-full sm:w-16"
-                @click="onFilter">
-                Go
-              </button>
               <button id="tabulator-html-filter-reset" type="button"
                 class="btn btn-secondary w-full sm:w-16 mt-2 sm:mt-0 sm:ml-1" @click="onResetFilter">
                 Reset
@@ -459,6 +454,13 @@ watch(data_select, async (e) => {
 watch(date_select, async (e) => {
   Dashboard.getDetail(e, Dashboard.items[0].id_utama)
 });
+watch(filter, async () => {
+  try {
+    onFilter();
+  } catch (error) {
+    alert("Gagal wtch filter" + error);
+  }
+});
 
 const openDataModal = () => {
   if (Dashboard.items.length == 0) {
@@ -542,7 +544,7 @@ const initTabulator = () => {
       // For HTML table
       {
         title: "ID",
-        minWidth: 200,
+        minWidth: 50,
         responsive: 0,
         field: "noid_produk",
         vertAlign: "middle",
@@ -558,7 +560,7 @@ const initTabulator = () => {
       },
       {
         title: "PAKET",
-        minWidth: 200,
+        minWidth: 100,
         responsive: 0,
         field: "paket",
         vertAlign: "middle",
@@ -590,7 +592,7 @@ const initTabulator = () => {
       },
       {
         title: "JUMLAH",
-        minWidth: 200,
+        minWidth: 100,
         responsive: 0,
         field: "jumlah",
         headerHozAlign: "center",
@@ -607,7 +609,7 @@ const initTabulator = () => {
       },
       {
         title: "MUTOWIF",
-        minWidth: 200,
+        minWidth: 100,
         responsive: 0,
         field: "mutowif",
         headerHozAlign: "center",
@@ -625,7 +627,7 @@ const initTabulator = () => {
       {
         title: "ACTIONS",
         headerHozAlign: "center",
-        minWidth: 200,
+        minWidth: 100,
         field: "actions",
         responsive: 1,
         hozAlign: "center",
@@ -706,7 +708,6 @@ const initTabulator = () => {
   });
 
   tabulator.value.on("cellClick", function (e, row) {
-    console.log("cellClick", row);
     const data = row.getData();
     Dashboard.getDetail(data)
   });
