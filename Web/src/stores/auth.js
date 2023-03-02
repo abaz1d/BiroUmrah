@@ -38,6 +38,7 @@ export const useAuthStore = defineStore({
     async logout() {
       try {
         const { data } = await request.get("logout");
+        console.log("logout",data)
         if (data.success) {
           router.push("/login");
           localStorage.removeItem("user");

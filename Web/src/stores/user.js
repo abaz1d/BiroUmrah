@@ -25,7 +25,7 @@ export const useUserStore = defineStore({
           }`
         );
         if (data.success) {
-          this.rawItems = data.data.rows;
+          this.rawItems = data.data;
           this.rawOutlets = data.data.regions;
           return this.rawItems;
         }

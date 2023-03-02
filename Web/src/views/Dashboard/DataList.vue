@@ -285,11 +285,12 @@
 import moment from "moment";
 import { useDashboardStore } from "@/stores/dashboard";
 const publicPath = import.meta.env.VITE_APP_BASE_API;
+import data404 from "@/assets/images/404.png";
 
 export default {
   setup() {
     const Dashboard = useDashboardStore();
-    return { Dashboard, moment, publicPath };
+    return { Dashboard, moment, publicPath, data404 };
   },
   props: {
     detail: { type: Object, required: true },
@@ -297,7 +298,7 @@ export default {
   },
   data() {
     return {
-      data404: new URL(window.location.origin) + "404.png"
+      //data404: new URL(window.location.origin) + "404.png"
     }
 
   },
