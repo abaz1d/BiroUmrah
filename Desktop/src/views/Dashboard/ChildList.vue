@@ -116,6 +116,10 @@
 <script>
 import moment from "moment";
 import { useDashboardStore } from "@/stores/dashboard";
+import indonesia from "@/assets/images/indonesia.png";
+import mekkah from "@/assets/images/mekkah.jpeg";
+import madhinah from "@/assets/images/madhinah.jpeg"; 
+import saudiarabia from "@/assets/images/saudiarabia.png"; 
 export default {
   setup() {
     const Dashboard = useDashboardStore();
@@ -155,14 +159,14 @@ export default {
     getUrl(item) {
       if (item.flag_md == 1 && item.flag_mk == 1) {
         if (item.status_pulang == 1) {
-          return `${new URL(window.location.origin)}` + "indonesia.png";
+          return indonesia;
         } else {
-          return `${new URL(window.location.origin)}` + "madhinah.jpeg";
+          return madhinah;
         }
       } else if (item.flag_md == 0 && item.flag_mk == 1) {
-        return `${new URL(window.location.origin)}` + "mekkah.jpeg";
+        return mekkah;
       } else {
-        return `${new URL(window.location.origin)}` + "saudiarabia.png";
+        return saudiarabia;
       }
     }
   },

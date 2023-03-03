@@ -297,6 +297,22 @@ const addData = () => {
   );
   resetModal();
 }
+const getUrl = (data) => {
+  if (data) {
+    var images = data.data.map((b) => String.fromCharCode(b)).join("");
+    return new URL(`${publicPath}gambar_kantor/${images}`).href;
+  } else {
+    return `${new URL(window.location.origin)}` + " 404.png";
+  }
+};
+const getUrlSurat = (data) => {
+  if (data) {
+    var surat = data.data.map((b) => String.fromCharCode(b)).join("");
+    return new URL(`${publicPath}file_sk/${surat}`).href;
+  } else {
+    return `${new URL(window.location.origin)}` + " 404.png";
+  }
+};
 
 const initTabulator = () => {
   tabulator.value = new Tabulator(tableRef.value, {
