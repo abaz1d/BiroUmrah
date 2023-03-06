@@ -5,7 +5,7 @@
     <MobileMenu />
     <!-- BEGIN: Top Bar -->
     <div
-      class="border-b border-white/[0.08] mt-[2.2rem] md:-mt-5 -mx-3 sm:-mx-8 px-3 sm:px-8 pt-3 md:pt-0 mb-10"
+      class="border-b border-white/[0.08] mt-[2.2rem] md:-mt-5 -mx-3 sm:-mx-8 px-3 sm:px-8 pt-3 md:pt-0 mb-3"
     >
       <div class="top-bar-boxed flex items-center">
         <!-- BEGIN: Logo -->
@@ -38,7 +38,9 @@
         <nav aria-label="breadcrumb" class="-intro-x h-full mr-auto">
           <ol class="breadcrumb breadcrumb-light">
             <li class="breadcrumb-item">
-              <a v-if="data.role !== 'Admin'" href="#">{{ data.nama_region }}</a>
+              <a v-if="data.role !== 'Admin'" href="#">{{
+                data.nama_region
+              }}</a>
               <a v-else href="#">Admin</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
@@ -91,7 +93,7 @@
                   <div
                     class="ml-auto w-auto truncate text-slate-500 text-xs text-right pr-3"
                   >
-                   Memiliki Semua Fitur
+                    Memiliki Semua Fitur
                   </div>
                 </a>
                 <a href="javascript:;" class="flex items-center mt-3 zoom-in">
@@ -529,7 +531,7 @@
             <div
               class="ml-auto w-auto truncate text-slate-500 text-xs text-right pr-3"
             >
-            Memiliki Semua Fitur
+              Memiliki Semua Fitur
             </div>
           </a>
           <a href="#" class="flex items-center mt-3 zoom-in">

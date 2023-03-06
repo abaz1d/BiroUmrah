@@ -5,6 +5,8 @@ import SimpleMenu from "@/layouts/simple-menu/Main.vue";
 import TopMenu from "@/layouts/top-menu/Main.vue";
 import Dashboard from "@/views/Dashboard/Main.vue";
 import Users from "@/views/Users/Main.vue";
+import Jurnal from "@/views/Jurnal/Main.vue";
+import PerkiraanAKutansi from "@/views/Perkiraan-Akutansi/Main.vue";
 import Login from "@/views/Login/Main.vue";
 import ErrorPage from "@/views/ErrorPage/Main.vue";
 import SKKP from "@/views/SKKP/Main.vue";
@@ -26,7 +28,19 @@ const routes = [
         component: Users,
         meta: { authorize: [] },
       },
-     
+      {
+        path: "jurnal-transaksi",
+        name: "top-menu-jurnal-transaksi",
+        component: Jurnal,
+        meta: { authorize: [] },
+      },
+      {
+        path: "perkiraan-akutansi",
+        name: "top-menu-perkiraan-akutansi",
+        component: PerkiraanAKutansi,
+        meta: { authorize: [] },
+      }
+
     ],
   },
   {
@@ -45,6 +59,18 @@ const routes = [
         component: Users,
         meta: { authorize: [] },
       },
+      {
+        path: "jurnal-transaksi",
+        name: "side-menu-jurnal-transaksi",
+        component: Jurnal,
+        meta: { authorize: [] },
+      },
+      {
+        path: "perkiraan-akutansi",
+        name: "side-menu-perkiraan-akutansi",
+        component: PerkiraanAKutansi,
+        meta: { authorize: [] },
+      }
     ],
   },
   {
@@ -63,6 +89,18 @@ const routes = [
         component: Users,
         meta: { authorize: [] },
       },
+      {
+        path: "jurnal-transaksi",
+        name: "simple-menu-jurnal-transaksi",
+        component: Jurnal,
+        meta: { authorize: [] }
+      },
+      {
+        path: "perkiraan-akutansi",
+        name: "simple-menu-perkiraan-akutansi",
+        component: PerkiraanAKutansi,
+        meta: { authorize: [] },
+      }
     ],
   },
   {

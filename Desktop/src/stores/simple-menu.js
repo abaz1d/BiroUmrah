@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { useAuthStore } from "./auth";
+import { useAuthStore } from "@/stores/auth";
 
 export const useSimpleMenuStore = defineStore("simpleMenu", {
   state: () => ({
@@ -8,6 +8,28 @@ export const useSimpleMenuStore = defineStore("simpleMenu", {
         icon: "HomeIcon",
         pageName: "simple-menu-dashboard",
         title: "Dashboard",
+      },
+      {
+        icon: "FileTextIcon",
+        pageName: "simple-menu-laporan",
+        title: "Laporan",
+        subMenu: [
+          {
+            icon: "FileIcon",
+            pageName: "simple-menu-jurnal-transaksi",
+            title: "Jurnal Transaksi",
+          },
+          {
+            icon: "FileUpIcon",
+            pageName: "simple-menu-perkiraan-akutansi",
+            title: "Perkiraan Akutansi",
+          },
+          // {
+          //   icon: "FileBoxIcon",
+          //   pageName: "simple-menu-laporan-stok",
+          //   title: "Laporan Stok",
+          // },
+        ],
       },
       {
         icon: "SlidersIcon",
@@ -59,7 +81,7 @@ export const useSimpleMenuStore = defineStore("simpleMenu", {
         // if (Role !== "Admin") {
         //   return Title !== "Pengaturan Data";
         // } else {
-          return item;
+        return item;
         // }
       }),
   },

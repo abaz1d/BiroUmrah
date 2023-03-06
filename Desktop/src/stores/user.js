@@ -25,18 +25,30 @@ export const useUserStore = defineStore({
           }`
         );
         if (data.success) {
-          this.rawItems = data.data;
+          this.rawItems = [
+            data.data,
+            data.data,
+            data.data,
+            data.data,
+            data.data,
+            data.data,
+            data.data,
+            data.data,
+            data.data,
+            data.data,
+            data.data,
+          ];
           this.rawOutlets = data.data.regions;
           return this.rawItems;
         }
       } catch (error) {
-       throw new Error(error)
+        throw new Error(error);
       }
     },
     async addItem(username, role, region, email_user, password) {
       const id_user = Date.now();
-      if (role === 'Admin') {
-      region = 'id_region';
+      if (role === "Admin") {
+        region = "id_region";
       }
       this.rawItems.push({
         id_user,
@@ -64,7 +76,7 @@ export const useUserStore = defineStore({
           });
         }
       } catch (error) {
-       throw new Error(error)
+        throw new Error(error);
       }
     },
     async removeItem(id_user) {
@@ -81,7 +93,7 @@ export const useUserStore = defineStore({
           })
           .catch((error) => console.error(error));
       } catch (error) {
-       throw new Error(error)
+        throw new Error(error);
       }
     },
     async updateItem(user) {
@@ -109,7 +121,7 @@ export const useUserStore = defineStore({
           });
         }
       } catch (error) {
-       throw new Error(error)
+        throw new Error(error);
       }
     },
   },
