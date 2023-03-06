@@ -17,7 +17,7 @@ export const useTopMenuStore = defineStore("topMenu", {
           {
             icon: "FileIcon",
             pageName: "top-menu-jurnal-transaksi",
-            title: "Jurnal Transaksi",
+            title: "Jurnal Akuntansi",
           },
           {
             icon: "FileUpIcon",

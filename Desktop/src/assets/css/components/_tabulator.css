@@ -5,7 +5,7 @@
 .tabulator {
   @apply overflow-hidden border-0 bg-transparent;
   .tabulator-header {
-    @apply font-medium text-current border-t border-b flex flex-col border-slate-200 bg-transparent;
+    @apply font-medium text-current border-t border-b border-slate-200 bg-transparent;
     .tabulator-headers {
       .tabulator-col {
         @apply bg-transparent border-r-0;
@@ -13,7 +13,7 @@
           @apply bg-slate-100;
         }
         .tabulator-col-content {
-          @apply px-5 py-3 flex flex-shrink-0;
+          @apply px-5 py-3;
           .tabulator-col-title {
             @apply pr-0;
           }
@@ -66,7 +66,7 @@
       @apply whitespace-normal;
     }
     .tabulator-paginator {
-      @apply flex items-center;
+      @apply flex items-center mb-4;
       @include media-breakpoint-down(md) {
         @apply block text-left;
       }
@@ -127,7 +127,7 @@
     }
   }
   .tabulator-tableHolder .tabulator-placeholder span {
-    @apply text-slate-500 font-normal text-sm overflow-auto;
+    @apply text-slate-500 font-normal text-sm;
   }
   .tabulator-loader {
     background: #ffffffbd;
@@ -146,15 +146,15 @@
 .dark {
   .tabulator {
     .tabulator-header {
-      @apply text-slate-300 border-darkmode-400 flex flex-col;
+      @apply text-slate-300 border-darkmode-400;
       .tabulator-headers .tabulator-col:hover {
         @apply bg-darkmode-300;
       }
     }
     .tabulator-table {
-      @apply bg-transparent text-slate-200 flex flex-shrink-0;
+      @apply bg-transparent text-slate-200;
       .tabulator-row {
-        @apply bg-transparent border-transparent flex flex-grow;
+        @apply bg-transparent border-transparent;
         &:hover,
         &.tabulator-row-even:hover {
           @apply bg-darkmode-700;

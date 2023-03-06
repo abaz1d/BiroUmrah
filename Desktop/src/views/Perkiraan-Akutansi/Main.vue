@@ -18,8 +18,10 @@
       >
         <ModalHeader>
           <h2 class="font-medium text-base mr-auto">
-            <p class="mx-auto" v-if="isEdit">Edit User {{ id_user }}</p>
-            <p class="mx-auto" v-else>Tambah User</p>
+            <p class="mx-auto" v-if="isEdit">
+              Edit Perkiraan Akutansi {{ id_user }}
+            </p>
+            <p class="mx-auto" v-else>Tambah Perkiraan Akutansi</p>
           </h2>
         </ModalHeader>
         <ModalBody class="grid grid-cols-12 gap-4 gap-y-3">
@@ -28,106 +30,89 @@
             id="userForm"
             class="col-span-12"
           >
-            <div class="col-span-12 mb-5" v-if="isEdit">
-              <label for="pos-form-1" class="form-label mb-1">ID User</label>
+            <div class="col-span-12 mb-5">
+              <label for="pos-form-1" class="form-label mb-1"
+                >No Perkiraan</label
+              >
               <input
                 id="pos-form-1"
                 type="text"
                 class="form-control flex-1"
-                placeholder="Masukan ID User"
+                placeholder="Masukan No Perkiraan"
                 v-model="id_user"
-                readonly
               />
             </div>
             <div class="col-span-12 mb-5">
-              <label for="pos-form-2" class="form-label mb-1">Username</label>
+              <label for="pos-form-2" class="form-label mb-1"
+                >Nama Perkiraan</label
+              >
               <input
                 id="pos-form-2"
                 type="text"
                 class="form-control flex-1"
-                placeholder="Masukan Username"
+                placeholder="Masukan Nama Perkiraan"
                 v-model="username"
                 required
               />
             </div>
             <div class="col-span-12 mb-5">
-              <label for="pos-form-3" class="form-label mb-1">Role</label>
-              <TomSelect v-model="role" class="w-full" required>
-                <option value="role" disabled>&gt;-- Pilih Role &lt;--</option>
-                <option value="Admin">Admin</option>
-                <option value="Operator">Operator</option>
-              </TomSelect>
-            </div>
-            <div v-if="role !== 'Admin'" class="col-span-12 mb-5">
-              <label for="pos-form-4" class="form-label mb-1">Region</label>
-              <TomSelect v-model="region" class="w-full">
-                <option value="id_region" disabled>
-                  &gt;-- Pilih Region &lt;--
-                </option>
-                <option
-                  v-for="region in User.regions"
-                  :key="region.id_region"
-                  :region="region"
-                  :value="region.id_region"
-                >
-                  {{ region.id_region }} - {{ region.nama_region }}
-                </option>
-              </TomSelect>
-            </div>
-            <div class="col-span-12 mb-5">
-              <label for="pos-form-5" class="form-label mb-1">Email</label>
+              <label for="pos-form-5" class="form-label mb-1"
+                >Level Laporan
+              </label>
               <input
                 id="pos-form-5"
                 class="form-control"
                 type="email"
-                placeholder="Masukan Email"
+                placeholder="Masukan Level Laporan"
                 v-model="email_user"
                 required
               />
             </div>
-            <div class="col-span-12 form-switch mb-5">
-              <label for="pos-form-6" class="form-label mb-1">Password</label>
-              <input
-                v-if="isEdit"
-                class="form-check-input m-2"
-                type="checkbox"
-                v-model="passEdit"
-              />
-              <br />
-              <label
-                v-if="passEdit"
-                for="pos-form-6"
-                class="text-xs form-label mx-2 mt-1 mb-0.5"
-                >Password Lama</label
-              >
+            <div class="col-span-12 mb-5">
+              <label for="pos-form-6" class="form-label mb-1">Buku Bantu</label>
               <input
                 id="pos-form-6"
                 type="text"
                 class="form-control flex-1"
-                placeholder="Masukan Password"
-                v-model="password"
-                :readonly="isEdit"
-              />
-              <label
-                v-if="passEdit"
-                for="pos-form-6"
-                class="text-xs form-label mx-2 mt-2 mb-0.5"
-                >Password Baru</label
-              >
-              <input
-                v-if="passEdit"
-                id="pos-form-6"
-                type="text"
-                class="form-control flex-1"
-                placeholder="Masukan Password Baru"
+                placeholder="Masukan Buku Bantu Baru"
                 v-model="password_baru"
                 :required="passEdit"
               />
-              <div v-if="isEdit" class="form-help">
-                * Password saat ini telah di HASH/Bcrypt, untuk menggaanti
-                password baru silahkan ceklis pada checkbox, Setelah di simpan
-                kata sandi baru akan ter HASH/Bcrypt juga.
-              </div>
+            </div>
+            <div class="col-span-12 mb-5">
+              <label for="pos-form-2" class="form-label mb-1">Kelompok</label>
+              <input
+                id="pos-form-2"
+                type="text"
+                class="form-control flex-1"
+                placeholder="Masukan Kelompok"
+                v-model="username"
+                required
+              />
+            </div>
+            <div class="col-span-12 mb-5">
+              <label for="pos-form-5" class="form-label mb-1">
+                Kelompok Data
+              </label>
+              <input
+                id="pos-form-5"
+                class="form-control"
+                type="email"
+                placeholder="Masukan Kelompok Data"
+                v-model="email_user"
+                required
+              />
+            </div>
+            <div class="col-span-12 mb-5">
+              <label for="pos-form-6" class="form-label mb-1">Detail</label>
+              <input
+                id="pos-form-6"
+                type="text"
+                class="form-control flex-1"
+                placeholder="Masukan Detail Baru"
+                v-model="password_baru"
+                :required="passEdit"
+              />
             </div>
           </form>
         </ModalBody>
@@ -166,11 +151,11 @@
             v-model="filter.field"
             class="form-select w-full 2xl:w-full mt-2 sm:mt-0 sm:w-auto"
           >
-            <option value="id_user">ID User</option>
-            <option value="username">Username</option>
+            <option value="id_user">No Perkiraan</option>
+            <option value="username">Nama Perkiraan</option>
             <option value="role">Role</option>
             <option value="nama_region">Region</option>
-            <option value="email_user">Email</option>
+            <option value="email_user">Level Laporan</option>
             <option value="password">Password</option>
           </select>
         </div>
@@ -267,11 +252,162 @@
       <div
         id="tabulator"
         ref="tableRef"
-        class="mt-5 table-report table-report--tabulator h-[250px]"
+        class="mt-5 table-report table-report--tabulator sm:h-96"
       ></div>
     </div>
   </div>
 
+  <Modal
+    backdrop="static"
+    :show="modal_bukuBesar"
+    size="modal-xl"
+    @hidden="modal_bukuBesar = false"
+  >
+    <ModalHeader>
+      <h2 class="font-medium text-base mr-auto w-full">
+        <p class="mx-auto" v-if="isEdit">Edit Buku Besar {{ id_user }}</p>
+        <p class="mx-auto" v-else>Tambah Buku Besar</p>
+      </h2>
+    </ModalHeader>
+    <ModalBody>
+      <div class="flex flex-col sm:flex-row sm:items-end xl:items-start mb-2">
+        <form id="tabulator-html-filter-form" class="xl:flex sm:mr-auto">
+          <div class="sm:flex items-center sm:mr-4">
+            <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2"
+              >Field</label
+            >
+            <select
+              id="tabulator-html-filter-field"
+              v-model="filter.field"
+              class="form-select w-full 2xl:w-full mt-2 sm:mt-0 sm:w-auto"
+            >
+              <option value="id_user">No Perkiraan</option>
+              <option value="username">Nama Perkiraan</option>
+              <option value="role">Role</option>
+              <option value="nama_region">Region</option>
+              <option value="email_user">Level Laporan</option>
+              <option value="password">Password</option>
+            </select>
+          </div>
+          <div class="sm:flex items-center sm:mr-4 mt-2 xl:mt-0">
+            <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2"
+              >Type</label
+            >
+            <select
+              id="tabulator-html-filter-type"
+              v-model="filter.type"
+              class="form-select w-full mt-2 sm:mt-0 sm:w-auto"
+            >
+              <option value="like" selected>like</option>
+              <option value="=">=</option>
+              <option value="<">&lt;</option>
+              <option value="<=">&lt;=</option>
+              <option value=">">></option>
+              <option value=">=">>=</option>
+              <option value="!=">!=</option>
+            </select>
+          </div>
+          <div class="sm:flex items-center sm:mr-4 mt-2 xl:mt-0">
+            <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2"
+              >Value</label
+            >
+            <input
+              id="tabulator-html-filter-value"
+              v-model="filter.value"
+              type="text"
+              class="form-control sm:w-40 2xl:w-full mt-2 sm:mt-0"
+              placeholder="Search..."
+            />
+          </div>
+          <div class="mt-2 xl:mt-0">
+            <button
+              id="tabulator-html-filter-reset"
+              type="button"
+              class="btn btn-secondary w-full sm:w-16 mt-2 sm:mt-0 sm:ml-1"
+              @click="onResetFilter"
+            >
+              Reset
+            </button>
+          </div>
+        </form>
+        <div class="flex mt-5 sm:mt-0">
+          <button
+            id="tabulator-print"
+            class="btn btn-outline-secondary w-1/2 sm:w-auto mr-2"
+            @click="onPrint"
+          >
+            <PrinterIcon class="w-4 h-4 mr-2" /> Print
+          </button>
+          <Dropdown class="w-1/2 sm:w-auto">
+            <DropdownToggle class="btn btn-outline-secondary w-full sm:w-auto">
+              <FileTextIcon class="w-4 h-4 mr-2" /> Export
+              <ChevronDownIcon class="w-4 h-4 ml-auto sm:ml-2" />
+            </DropdownToggle>
+            <DropdownMenu class="w-40">
+              <DropdownContent>
+                <DropdownItem @click="onExportCsv">
+                  <FileTextIcon class="w-4 h-4 mr-2" /> Export CSV
+                </DropdownItem>
+                <DropdownItem @click="onExportXlsx">
+                  <FileTextIcon class="w-4 h-4 mr-2" /> Export XLSX
+                </DropdownItem>
+              </DropdownContent>
+            </DropdownMenu>
+          </Dropdown>
+        </div>
+      </div>
+      <form
+        @submit.prevent="isEdit ? updateUser() : addUser()"
+        id="userForm"
+        class="grid grid-cols-2 gap-2 bg-green-200 rounded-lg dark:bg-transparent"
+      >
+        <div class="col-span-1 mb-1 p-2">
+          <label for="pos-form-1" class="form-label mb-1">No Perkiraan</label>
+          <input
+            id="pos-form-1"
+            type="text"
+            class="form-control flex-1"
+            placeholder="Masukan No Perkiraan"
+            v-model="id_user"
+          />
+        </div>
+        <div class="col-span-1 mb-1 p-2">
+          <label for="pos-form-2" class="form-label mb-1">Nama Perkiraan</label>
+          <input
+            id="pos-form-2"
+            type="text"
+            class="form-control flex-1"
+            placeholder="Masukan Nama Perkiraan"
+            v-model="username"
+            required
+          />
+        </div>
+        <div class="overflow-auto col-span-2 p-2">
+          <div class="intro-y box">
+            <div class="overflow-auto">
+              <div
+                id="tabulatorBukuBesar"
+                ref="tableRefBukuBesar"
+                class="mx-2 table-report table-report--tabulator sm:h-96"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </ModalBody>
+    <ModalFooter class="text-right">
+      <button
+        type="button"
+        @click="resetModal"
+        class="btn btn-outline-secondary w-32 mr-1"
+      >
+        Cancel
+      </button>
+      <button type="submit" form="userForm" class="btn btn-primary w-32">
+        Simpan
+      </button>
+    </ModalFooter>
+  </Modal>
   <Modal
     :show="deleteConfirmationModal"
     @hidden="deleteConfirmationModal = false"
@@ -331,10 +467,12 @@ const region = ref("id_region");
 const email_user = ref("");
 const password = ref("");
 const password_baru = ref("");
+const modal_bukuBesar = ref(false);
 const deleteConfirmationModal = ref(false);
 const isEdit = ref(false);
 const passEdit = ref(false);
 const tabulator = ref();
+const tabulatorBukuBesar = ref();
 const auth = ref();
 const filter = reactive({
   field: "id_user",
@@ -364,15 +502,18 @@ export default {
       password_baru,
       isLoading,
       tabulator,
+      tabulatorBukuBesar,
       filter,
       isEdit,
       passEdit,
+      modal_bukuBesar,
     };
   },
   methods: {
     resetModal() {
       modal_utama.value = false;
       deleteConfirmationModal.value = false;
+      modal_bukuBesar.value = false;
       isEdit.value = false;
       passEdit.value = false;
       id_user.value = "";
@@ -467,7 +608,7 @@ export default {
             title: "NOPER",
             // minWidth: 200,
             minWidth: 80,
-            responsive: 1,
+            responsive: 0,
             field: "id_user",
             vertAlign: "middle",
             print: false,
@@ -483,6 +624,7 @@ export default {
           {
             title: "NAMA PERKIRAAN AKUTANSI",
             headerHozAlign: "center",
+            responsive: 1,
             minWidth: 250,
             field: "username",
             hozAlign: "center",
@@ -490,9 +632,6 @@ export default {
             print: false,
             editor: "input",
             editable: false,
-            cellDblClick: function (e, cell) {
-              cell.edit(true);
-            },
             download: false,
             formatter(cell) {
               return `<div>
@@ -512,9 +651,6 @@ export default {
             print: false,
             editor: "textarea",
             editable: false,
-            cellDblClick: function (e, cell) {
-              cell.edit(true);
-            },
             download: false,
             formatter(cell) {
               return `<div>
@@ -534,9 +670,6 @@ export default {
             print: false,
             editor: "textarea",
             editable: false,
-            cellDblClick: function (e, cell) {
-              cell.edit(true);
-            },
             download: false,
             formatter(cell) {
               if (cell.getData().role != "Admin") {
@@ -554,16 +687,12 @@ export default {
             title: "KEL DATA",
             minWidth: 50,
             headerHozAlign: "center",
-            responsive: 0,
             field: "email_user",
             hozAlign: "center",
             vertAlign: "middle",
             print: false,
             editor: "textarea",
             editable: false,
-            cellDblClick: function (e, cell) {
-              cell.edit(true);
-            },
             download: false,
             formatter(cell) {
               return `<div>
@@ -583,9 +712,6 @@ export default {
             print: false,
             editor: "input",
             editable: false,
-            cellDblClick: function (e, cell) {
-              cell.edit(true);
-            },
             download: false,
             formatter() {
               return `<div>
@@ -603,9 +729,6 @@ export default {
             print: false,
             editor: "input",
             editable: false,
-            cellDblClick: function (e, cell) {
-              cell.edit(true);
-            },
             download: false,
           },
           {
@@ -618,9 +741,6 @@ export default {
             print: false,
             editor: "input",
             editable: false,
-            cellDblClick: function (e, cell) {
-              cell.edit(true);
-            },
             download: false,
           },
           {
@@ -633,9 +753,6 @@ export default {
             print: false,
             editor: "input",
             editable: false,
-            cellDblClick: function (e, cell) {
-              cell.edit(true);
-            },
             download: false,
           },
           {
@@ -757,13 +874,21 @@ export default {
             download: true,
           },
           {
-            title: "SLDO",
+            title: "SALDO",
             field: "email_user",
             visible: false,
             print: true,
             download: true,
           },
         ],
+      });
+      tabulator.value.on("rowDblClick", async function (e, row) {
+        const id = row.getData().no_invoice;
+        try {
+          modal_bukuBesar.value = true;
+        } catch (error) {
+          alert("2click" + error);
+        }
       });
       this.tabulator.on("renderComplete", function () {
         createIcons({
@@ -772,20 +897,244 @@ export default {
           nameAttr: "data-lucide",
         });
       });
-      this.tabulator.on("cellEdited", function (cell) {
-        id_user.value = cell.getData().id_user;
-        username.value = cell.getData().username;
-        role.value = cell.getData().role;
-        region.value = cell.getData().id_region;
-        email_user.value = cell.getData().email_user;
-        password.value = cell.getData().password;
-        isEdit.value = true;
-        modal_utama.value = true;
+    },
+    initBukuBesar() {
+      this.tabulatorBukuBesar = new Tabulator(this.$refs.tableRefBukuBesar, {
+        printAsHtml: true,
+        printStyled: true,
+        printHeader: `<h1 class='text-2xl p-2 m-2 text-center border-y-2 border-black'>Tabel User<h1>`,
+        printFooter: `<h2 class='p-2 m-2 text-center mt-4'>${moment(
+          Date.now()
+        ).format("DD MMM YYYY HH:SS")}<h2>`,
+        data: this.User.items,
+        pagination: "remote",
+        paginationSize: 10,
+        paginationSizeSelector: [10, 20, 30, 40, 50],
+        layout: "fitColumns",
+        responsiveLayout: "collapse",
+        placeholder: "Tida ada Data di temukan",
+        columns: [
+          {
+            formatter: "responsiveCollapse",
+            width: 40,
+            minWidth: 30,
+            hozAlign: "center",
+            resizable: false,
+            headerSort: false,
+          },
+
+          // For HTML table
+          {
+            title: "TANGGAL",
+            // minWidth: 200,
+            minWidth: 100,
+            responsive: 0,
+            field: "id_user",
+            vertAlign: "middle",
+            print: false,
+            download: false,
+            formatter(cell) {
+              return `<div>
+                <div class="font-medium whitespace-nowrap">${
+                  cell.getData().id_user
+                }</div>
+              </div>`;
+            },
+          },
+          {
+            title: "SALDO AWAL",
+            headerHozAlign: "center",
+            minWidth: 150,
+            field: "username",
+            hozAlign: "center",
+            vertAlign: "middle",
+            print: false,
+            editor: "input",
+            editable: false,
+            download: false,
+            formatter(cell) {
+              return `<div>
+                <div class="font-medium whitespace-nowrap">${
+                  cell.getData().username
+                }</div>
+              </div>`;
+            },
+          },
+          {
+            title: "MUTASI DEBET",
+            minWidth: 150,
+            headerHozAlign: "center",
+            field: "role",
+            hozAlign: "center",
+            vertAlign: "middle",
+            print: false,
+            editor: "textarea",
+            editable: false,
+            download: false,
+            formatter(cell) {
+              return `<div>
+                <div class="font-medium whitespace-nowrap">${
+                  cell.getData().role
+                }</div>
+              </div>`;
+            },
+          },
+          {
+            title: "MUTASI KREDIT",
+            minWidth: 160,
+            headerHozAlign: "center",
+            field: "id_region",
+            hozAlign: "center",
+            vertAlign: "middle",
+            print: false,
+            editor: "textarea",
+            editable: false,
+            download: false,
+            formatter(cell) {
+              if (cell.getData().role != "Admin") {
+                return `<div>
+                <div class="font-medium whitespace-nowrap">${
+                  cell.getData().id_region
+                } - ${cell.getData().nama_region}</div>
+              </div>`;
+              } else {
+                return `<div class="font-medium whitespace-nowrap">---</div>`;
+              }
+            },
+          },
+          {
+            title: "SLDO AKHIR",
+            minWidth: 150,
+            headerHozAlign: "center",
+            field: "email_user",
+            hozAlign: "center",
+            vertAlign: "middle",
+            print: false,
+            editor: "textarea",
+            editable: false,
+            download: false,
+            formatter(cell) {
+              return `<div>
+                <div class="font-medium whitespace-nowrap">${
+                  cell.getData().email_user
+                }</div>
+              </div>`;
+            },
+          },
+          {
+            title: "ACTIONS",
+            headerHozAlign: "center",
+            minWidth: 100,
+            field: "actions",
+            responsive: 1,
+            hozAlign: "center",
+            vertAlign: "middle",
+            print: false,
+            download: false,
+            formatter(cell) {
+              const a =
+                auth.value.role == "Admin"
+                  ? dom(`<div class="flex lg:justify-center items-center">
+                <a id="edit" class="flex items-center mr-3" href="javascript:;">
+                  <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit
+                </a>
+                <a id="delete" class="flex items-center text-danger" href="javascript:;">
+                  <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                </a>
+              </div>`)
+                  : dom(`<div class="flex lg:justify-center items-center">
+                <a id="edit" class="flex items-center mr-3" href="javascript:;">
+                  <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit
+                </a>
+              </div>`);
+              dom(a).on("click", "a", function (e) {
+                if (e.id === "edit") {
+                  id_user.value = cell.getData().id_user;
+                  username.value = cell.getData().username;
+                  email_user.value = cell.getData().email_user;
+                  role.value = cell.getData().role;
+                  region.value = cell.getData().id_region;
+                  password.value = cell.getData().password;
+                  isEdit.value = true;
+                  modal_utama.value = true;
+                } else {
+                  id_user.value = cell.getData().id_user;
+                  username.value = cell.getData().username;
+                  deleteConfirmationModal.value = true;
+                }
+              });
+              return a[0];
+            },
+          },
+          // For print format
+          {
+            title: "TANGGAL",
+            field: "id_user",
+            visible: false,
+            print: true,
+            download: true,
+          },
+          {
+            title: "SALDO AWAL",
+            field: "username",
+            visible: false,
+            print: true,
+            download: true,
+          },
+          {
+            title: "MUTASI DEBET",
+            field: "ro5",
+            visible: false,
+            print: true,
+            download: true,
+          },
+          {
+            title: "MUTASI KREDIT",
+            field: "id_region",
+            visible: false,
+            print: true,
+            download: true,
+            formatter(cell) {
+              if (cell.getData().role != "Admin") {
+                return `<div>
+                <div class="font-medium whitespace-nowrap">${
+                  cell.getData().id_region
+                } - ${cell.getData().nama_region}</div>
+              </div>`;
+              } else {
+                return `<div class="font-medium whitespace-nowrap">-</div>`;
+              }
+            },
+          },
+          {
+            title: "SLDO AKHIR",
+            field: "email_user",
+            visible: false,
+            print: true,
+            download: true,
+          },
+        ],
+      });
+      tabulator.value.on("rowDblClick", async function (e, row) {
+        const id = row.getData().no_invoice;
+        try {
+          modal_bukuBesar.value = true;
+        } catch (error) {
+          alert("2click" + error);
+        }
+      });
+      this.tabulator.on("renderComplete", function () {
+        createIcons({
+          icons,
+          "stroke-width": 1.5,
+          nameAttr: "data-lucide",
+        });
       });
     },
     reInitOnResizeWindow() {
       window.addEventListener("resize", () => {
         this.tabulator.redraw();
+        this.tabulatorBukuBesar.redraw();
         createIcons({
           icons,
           "stroke-width": 1.5,
@@ -830,6 +1179,7 @@ export default {
     this.User.readItem()
       .then(() => {
         this.initTabulator();
+        this.initBukuBesar();
         this.reInitOnResizeWindow();
         this.$refs.modalErrorRef.errorDatabaseModal = false;
         isLoading.value = false;

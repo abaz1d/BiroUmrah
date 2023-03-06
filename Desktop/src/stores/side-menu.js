@@ -17,7 +17,7 @@ export const useSideMenuStore = defineStore("sideMenu", {
           {
             icon: "FileIcon",
             pageName: "side-menu-jurnal-transaksi",
-            title: "Jurnal Transaksi",
+            title: "Jurnal Akuntansi",
           },
           {
             icon: "FileUpIcon",

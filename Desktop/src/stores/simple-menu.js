@@ -17,7 +17,7 @@ export const useSimpleMenuStore = defineStore("simpleMenu", {
           {
             icon: "FileIcon",
             pageName: "simple-menu-jurnal-transaksi",
-            title: "Jurnal Transaksi",
+            title: "Jurnal Akuntansi",
           },
           {
             icon: "FileUpIcon",
