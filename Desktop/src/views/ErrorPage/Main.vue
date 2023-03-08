@@ -10,7 +10,7 @@
           <img
             width="100"
             height="100"
-            alt="Biro Umrah Jateng HTML"
+            alt="Abadan Land Arrangement"
             class="h-48 lg:h-auto"
             src="@/assets/images/error-illustration.svg"
           />

@@ -9,7 +9,7 @@
     <div class="mobile-menu-bar">
       <a href="" class="flex mr-auto">
         <img
-          alt="Biro Umrah Jateng HTML"
+          alt="Abadan Land Arrangement"
           class="w-6"
           src="@/assets/images/logo.png"
           width="100"

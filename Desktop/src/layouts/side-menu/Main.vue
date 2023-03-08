@@ -13,20 +13,20 @@
           <img
             width="100"
             height="100"
-            alt="Biro Umrah Jateng HTML"
+            alt="Abadan Land Arrangement"
             class="w-6 h-6 block dark:hidden"
             src="@/assets/images/logo.png"
           />
           <img
             width="100"
             height="100"
-            alt="Biro Umrah Jateng HTML"
+            alt="Abadan Land Arrangement"
             class="w-6 hidden dark:block"
             src="@/assets/images/logo.png"
           />
           <span
             class="font-philosopher hidden xl:block text-white dark:text-[#CDA562] text-lg ml-3"
-            ><b> Biro Umrah Jateng </b>
+            ><b> Abadan Land Arrangement </b>
           </span>
         </router-link>
         <div class="side-nav__devider my-6"></div>

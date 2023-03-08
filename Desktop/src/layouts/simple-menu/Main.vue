@@ -8,7 +8,7 @@
       <nav class="side-nav side-nav--simple">
         <a href="" class="intro-x flex items-center pl-5 pt-4">
           <img
-            alt="Biro Umrah Jateng HTML"
+            alt="Abadan Land Arrangement"
             class="w-6 h-6 block dark:hidden"
             src="@/assets/images/logo.png"
             width="100"
@@ -17,7 +17,7 @@
           <img
             width="100"
             height="100"
-            alt="Biro Umrah Jateng HTML"
+            alt="Abadan Land Arrangement"
             class="w-6 hidden dark:block"
             src="@/assets/images/logo.png"
           />

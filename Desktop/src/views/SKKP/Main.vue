@@ -14,14 +14,14 @@
           </div>
           <div class="my-auto">
             <img
-              alt="Biro Umrah Jateng HTML"
+              alt="Abadan Land Arrangement"
               width="100"
               height="100"
               class="-intro-x w-1/2 -mt-16 fill-[#CDA562] hidden dark:block"
               src="@/assets/images/logo.png"
             />
             <img
-              alt="Biro Umrah Jateng HTML"
+              alt="Abadan Land Arrangement"
               width="100"
               height="100"
               class="-intro-x w-1/2 -mt-16 fill-white block dark:hidden"
@@ -30,13 +30,13 @@
             <div
               class="intro-x font-philosopher text-white dark:text-[#CDA562] font-medium ml-16 text-4xl leading-tight mt-10"
             >
-              <b> Biro Umrah Jateng </b>
+              <b> Abadan Land Arrangement </b>
             </div>
-            <div
+            <!-- <div
               class="intro-x mt-5 font-philosopher text-2xl text-white ml-[120px] dark:text-[#CDA562]"
             >
               Sejak 1960
-            </div>
+            </div> -->
           </div>
         </div>
         <!-- END: Login Info -->
@@ -47,14 +47,14 @@
           >
             <div class="xl:hidden">
               <img
-                alt="Biro Umrah Jateng HTML"
+                alt="Abadan Land Arrangement"
                 width="100"
                 height="100"
                 class="intro-x -mt-[120px] mb-3 text-slate-400 xl:hidden text-center w-1/5 mx-auto hidden dark:block"
                 src="@/assets/images/logo.png"
               />
               <img
-                alt="Biro Umrah Jateng HTML"
+                alt="Abadan Land Arrangement"
                 width="100"
                 height="100"
                 class="intro-x -mt-[120px] mb-3 text-slate-400 xl:hidden text-center w-1/5 mx-auto block dark:hidden"

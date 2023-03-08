@@ -7,29 +7,29 @@
         <div class="hidden xl:flex flex-col min-h-screen">
           <div class="my-auto">
             <img
-              alt="Biro Umrah Jateng HTML"
+              alt="Abadan Land Arrangement"
               width="100"
               height="100"
               class="-intro-x w-1/2 -mt-16 fill-[#CDA562] hidden dark:block"
               src="@/assets/images/logo.png"
             />
             <img
-              alt="Biro Umrah Jateng HTML"
+              alt="Abadan Land Arrangement"
               width="100"
               height="100"
               class="-intro-x w-1/2 -mt-16 fill-white block dark:hidden"
               src="@/assets/images/logo.png"
             />
             <div
-              class="intro-x font-philosopher text-white dark:text-[#CDA562] font-medium ml-28 text-4xl leading-tight mt-10"
+              class="intro-x font-philosopher text-white dark:text-[#CDA562] font-medium -ml-9 text-4xl leading-tight mt-10"
             >
-              <b>BIRO UMRAH </b>
+              <b>Abadan Land Arrangement</b>
             </div>
-            <div
+            <!-- <div
               class="intro-x mt-5 font-philosopher text-2xl text-white ml-[90px] dark:text-[#CDA562]"
             >
               Provinsi Jawa Tengah
-            </div>
+            </div> -->
           </div>
         </div>
         <!-- END: Login Info -->
@@ -40,14 +40,14 @@
           >
             <div class="xl:hidden">
               <img
-                alt="Biro Umrah Jateng HTML"
+                alt="Abadan Land Arrangement"
                 width="100"
                 height="100"
                 class="intro-x -mt-[120px] mb-3 text-slate-400 xl:hidden text-center w-1/5 mx-auto hidden dark:block"
                 src="@/assets/images/logo.png"
               />
               <img
-                alt="Biro Umrah Jateng HTML"
+                alt="Abadan Land Arrangement"
                 width="100"
                 height="100"
                 class="intro-x -mt-[120px] mb-3 text-slate-400 xl:hidden text-center w-1/5 mx-auto block dark:hidden"
@@ -62,7 +62,7 @@
             <div class="intro-x mt-2 text-slate-400 xl:hidden text-center">
               Selamat Datang di
               <span class="font-philosopher text-[#CDA562] drop-shadow-2xl">
-                <b> Biro Umrah Jateng </b> </span
+                <b> Abadan Land Arrangement </b> </span
               >, silahkan masuk untuk mengakses aplikasi
             </div>
             <div class="intro-x mt-8">
@@ -164,7 +164,7 @@
               >
               di
               <span class="font-philosopher text-[#CDA562] drop-shadow-2xl">
-                <b> Biro Umrah Jateng </b>
+                <b> Abadan Land Arrangement </b>
               </span>
             </div>
           </div>
@@ -184,7 +184,9 @@
     <div class="font-medium">
       Hai {{ dataPopup.role }} - {{ dataPopup.username }}, Selamat Datang di
       Aplikasi Data Anggota
-      <b class="font-philosopher text-xl text-[#CDA562] mr-2">Biro Umrah Jateng</b>
+      <b class="font-philosopher text-xl text-[#CDA562] mr-2"
+        >Abadan Land Arrangement</b
+      >
       Lokal {{ dataPopup.nama_region }}
     </div>
   </Notification>
