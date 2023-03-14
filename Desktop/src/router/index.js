@@ -1,5 +1,5 @@
 import { useAuthStore } from "@/stores/auth";
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import SideMenu from "@/layouts/side-menu/Main.vue";
 import SimpleMenu from "@/layouts/simple-menu/Main.vue";
 import TopMenu from "@/layouts/top-menu/Main.vue";
@@ -39,8 +39,7 @@ const routes = [
         name: "top-menu-perkiraan-akutansi",
         component: PerkiraanAKutansi,
         meta: { authorize: [] },
-      }
-
+      },
     ],
   },
   {
@@ -70,7 +69,7 @@ const routes = [
         name: "side-menu-perkiraan-akutansi",
         component: PerkiraanAKutansi,
         meta: { authorize: [] },
-      }
+      },
     ],
   },
   {
@@ -93,14 +92,14 @@ const routes = [
         path: "jurnal-transaksi",
         name: "simple-menu-jurnal-transaksi",
         component: Jurnal,
-        meta: { authorize: [] }
+        meta: { authorize: [] },
       },
       {
         path: "perkiraan-akutansi",
         name: "simple-menu-perkiraan-akutansi",
         component: PerkiraanAKutansi,
         meta: { authorize: [] },
-      }
+      },
     ],
   },
   {
@@ -125,7 +124,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
     return savedPosition || { left: 0, top: 0 };
