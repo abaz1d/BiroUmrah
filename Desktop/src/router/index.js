@@ -124,7 +124,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory("https://abadan-company.com/"),
   routes,
   scrollBehavior(to, from, savedPosition) {
     return savedPosition || { left: 0, top: 0 };
