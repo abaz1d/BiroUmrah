@@ -12,6 +12,10 @@ node_modules
 # dist
 dist-ssr
 coverage
+nginx.conf
+cert.pem
+cert.key
+default
 *.local
 
 /cypress/videos/
