@@ -131,23 +131,23 @@ const router = createRouter({
   },
 });
 
-router.beforeEach((to, from, next) => {
-  const { authorize } = to.meta;
-  const publicPages = ["/login"];
-  const authRequired = !publicPages.includes(to.path);
-  const auth = useAuthStore();
-  const currentUser = auth.items;
-  if (authorize) {
-    if (authRequired && !auth.user) {
-      auth.returnUrl = to.fullPath;
-      return next({ path: "/login" });
-    }
-    if (authorize.length && !authorize.includes(currentUser.role)) {
-      alert("Role Akun Anda, Tidak Bisa Mengakses Halaman ini !");
-      return next({ path: "/" });
-    }
-  }
-  next();
-});
+// router.beforeEach((to, from, next) => {
+//   const { authorize } = to.meta;
+//   const publicPages = ["/login"];
+//   const authRequired = !publicPages.includes(to.path);
+//   const auth = useAuthStore();
+//   const currentUser = auth.items;
+//   if (authorize) {
+//     if (authRequired && !auth.user) {
+//       auth.returnUrl = to.fullPath;
+//       return next({ path: "/login" });
+//     }
+//     if (authorize.length && !authorize.includes(currentUser.role)) {
+//       alert("Role Akun Anda, Tidak Bisa Mengakses Halaman ini !");
+//       return next({ path: "/" });
+//     }
+//   }
+//   next();
+// });
 
 export default router;
