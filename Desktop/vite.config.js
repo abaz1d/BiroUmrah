@@ -6,8 +6,8 @@ import vue from "@vitejs/plugin-vue";
 const path = require("path");
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  //base: path.resolve(__dirname, "./dist/"),
+export default defineConfig(({ command, mode }) => ({
+  // base: command === "build" ? "/abaz-fullstack-developer/" : "/",
   plugins: [/*basicSsl(),*/ tailwindcss, vue({}), splitVendorChunkPlugin()],
   resolve: {
     alias: {
@@ -15,17 +15,21 @@ export default defineConfig({
     },
   },
   // server: {
-  //   port: 8000,
+  //   port: 8000, https://abadan-company.com/
   // },
-  build: {
-    // rollupOptions: {
-    //   output: {
-    //     manualChunks(id) {
-    //       if (id.includes('node_modules')) {
-    //         return id.toString().split('node_modules/')[1].split('/')[0].toString();
-    //       }
-    //     }
-    //   }
-    // }
-  },
-});
+  // build: {
+  //   brotliSize: false,
+  //   manifest: false,
+  //   minify: mode === "development" ? false : "terser",
+  //   outDir: "dist",
+  //   sourcemap: command === "serve" ? "inline" : false,
+
+  //   rollupOptions: {
+  //     output: {
+  //       assetFileNames: "clientlib-site/resources/[ext]/[name][extname]",
+  //       chunkFileNames: "clientlib-site/resources/chunks/[name].[hash].js",
+  //       entryFileNames: "clientlib-site/resources/js/[name].js",
+  //     },
+  //   },
+  // },
+}));
