@@ -8,7 +8,7 @@ const path = require("path");
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => ({
   //base: command === "build" ? "https://abadan-company.com/" : "/",
-  base: "https://abadan-company.com/",
+  //base: "https://abadan-company.com/",
   //base: resolve("https://abadan-company.com/", "./dist/"),
   plugins: [/*basicSsl(),*/ tailwindcss, vue({}), splitVendorChunkPlugin()],
   resolve: {
