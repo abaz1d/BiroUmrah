@@ -7,7 +7,7 @@ const path = require("path");
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => ({
-  // base: command === "build" ? "/abaz-fullstack-developer/" : "/",
+  base: command === "build" ? "https://abadan-company.com/" : "/",
   plugins: [/*basicSsl(),*/ tailwindcss, vue({}), splitVendorChunkPlugin()],
   resolve: {
     alias: {
